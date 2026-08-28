@@ -19,8 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
- <link href="css/panel.css" rel="stylesheet"> 
-
+    <link href="css/panel.css" rel="stylesheet"> 
+    <script src="js/local.js"></script>
 </head>
 
 <body id="page-top">
@@ -32,11 +32,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15 mr-2">
+                    <i class="fas fa-hamburger text-warning"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Tienda</div>
+                <div class="sidebar-brand-text font-weight-bold" style="letter-spacing: 0.5px;">Pocheches Fast Food</div>
             </a>
 
             <!-- Divider -->
@@ -46,7 +46,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Panel de Control</span></a>
             </li>
 
             <!-- Divider -->
@@ -150,7 +150,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar productos..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -195,10 +195,23 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span id="nombreusuario" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img id="imagenPerfil" class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg" style="object-fit: cover;">
                             </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="perfil.html">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <button id="logoutButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
+                                    Cerrar Sesión
+                                </button>
+                            </div>
                         </li>
 
                     </ul>
@@ -279,18 +292,20 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-out-alt text-danger mr-2"></i>¿Cerrar Sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si estás listo para salir del sistema.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-sm" href="login.html">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
@@ -309,7 +324,6 @@
         // Mostrar en la tabla con botones para cambiar estado y eliminar
         // El estado se puede cambiar con PATCH /api/pedidos/:id/estado
     </script>
-
 </body>
 
 </html>

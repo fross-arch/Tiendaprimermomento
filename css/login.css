@@ -1,6 +1,9 @@
 
-.bg-login-image {
-  background: url('../img/imgzeus.png');
-  background-position: center;
-  background-size: cover;
+.bg-login-image,
+.bg-register-image {
+  background-color: #141c30;
+  background-image: url('../img/pochechefastfood.jpg');
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

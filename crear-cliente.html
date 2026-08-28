@@ -20,7 +20,8 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
- <link href="css/panel.css" rel="stylesheet"> 
+    <link href="css/panel.css" rel="stylesheet"> 
+    <script src="js/local.js"></script>
 </head>
 
 <body id="page-top">
@@ -32,11 +33,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15 mr-2">
+                    <i class="fas fa-hamburger text-warning"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Tienda</div>
+                <div class="sidebar-brand-text font-weight-bold" style="letter-spacing: 0.5px;">Pocheches Fast Food</div>
             </a>
 
             <!-- Divider -->
@@ -46,7 +47,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Panel de Control</span></a>
             </li>
 
             <!-- Divider -->
@@ -150,7 +151,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar productos..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -175,7 +176,7 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
+                                            placeholder="Buscar productos..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
@@ -213,10 +214,23 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span id="nombreusuario" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img id="imagenPerfil" class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg" style="object-fit: cover;">
                             </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="perfil.html">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <button id="logoutButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
+                                    Cerrar Sesión
+                                </button>
+                            </div>
                         </li>
 
                     </ul>
@@ -236,57 +250,120 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-8">
-                            <form id="formulario-cliente">
-                          
-                                <!-- Nombre input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="nombre-cli" class="form-control" required />
-                                    <label class="form-label" for="nombre-cli">Nombre</label>
+                        <!-- Formulario de datos del cliente -->
+                        <div class="col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Datos del Cliente</h6>
                                 </div>
+                                <div class="card-body">
+                                    <form id="formulario-cliente">
+                                  
+                                        <div class="form-row">
+                                            <!-- Nombre input -->
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label class="font-weight-bold" for="nombre-cli">Nombre:</label>
+                                                <input type="text" id="nombre-cli" class="form-control" placeholder="Ej: Carlos" required />
+                                            </div>
 
-                                <!-- Apellido input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="apellido-cli" class="form-control" required />
-                                    <label class="form-label" for="apellido-cli">Apellido</label>
-                                </div>
-    
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="email-cli" class="form-control" required />
-                                    <label class="form-label" for="email-cli">Email</label>
-                                </div>
+                                            <!-- Apellido input -->
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label class="font-weight-bold" for="apellido-cli">Apellido:</label>
+                                                <input type="text" id="apellido-cli" class="form-control" placeholder="Ej: Gómez" required />
+                                            </div>
+                                        </div>
 
-                                <!-- Celular input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="celular-cli" class="form-control" required />
-                                    <label class="form-label" for="celular-cli">Celular</label>
-                                </div>
+                                        <div class="form-row">
+                                            <!-- Email input -->
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label class="font-weight-bold" for="email-cli">Email:</label>
+                                                <input type="email" id="email-cli" class="form-control" placeholder="cliente@correo.com" required />
+                                            </div>
 
-                                <!-- Dirección input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="direccion-cli" class="form-control" required />
-                                    <label class="form-label" for="direccion-cli">Dirección</label>
-                                </div>
+                                            <!-- Celular input -->
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label class="font-weight-bold" for="celular-cli">Celular / Teléfono:</label>
+                                                <input type="text" id="celular-cli" class="form-control" placeholder="3001234567" required />
+                                            </div>
+                                        </div>
 
-                                <!-- Dirección 2 input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="direccion2-cli" class="form-control" />
-                                    <label class="form-label" for="direccion2-cli">Dirección 2 (Opcional)</label>
-                                </div>
+                                        <!-- Dirección input -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="direccion-cli">Dirección Principal:</label>
+                                            <input type="text" id="direccion-cli" class="form-control" placeholder="Calle 10 # 20-30" required />
+                                        </div>
 
-                                <!-- Descripción textarea -->
-                                <div class="form-outline mb-4">
-                                    <textarea class="form-control" id="descripcion-cli" rows="3"></textarea>
-                                    <label class="form-label" for="descripcion-cli">Descripción/Notas (Opcional)</label>
+                                        <!-- Dirección 2 input -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="direccion2-cli">Dirección 2 (Opcional):</label>
+                                            <input type="text" id="direccion2-cli" class="form-control" placeholder="Apto, Casa, Torre..." />
+                                        </div>
+
+                                        <!-- Descripción textarea -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold" for="descripcion-cli">Notas / Descripción (Opcional):</label>
+                                            <textarea class="form-control" id="descripcion-cli" rows="2" placeholder="Indicaciones para la entrega..."></textarea>
+                                        </div>
+                                    
+                                        <!-- Submit button -->
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            <i class="fas fa-user-plus mr-1"></i> Guardar Cliente
+                                        </button>
+                                    </form>
                                 </div>
-                            
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4">Crear Cliente</button>
-                            </form>
+                            </div>
+                        </div>
+
+                        <!-- Selector de Imagen -->
+                        <div class="col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Foto del Cliente</h6>
+                                </div>
+                                <div class="card-body text-center">
+                                    <!-- Vista previa -->
+                                    <div class="mb-3">
+                                        <img id="avatar-preview" src="img/undraw_profile_2.svg" class="img-profile rounded-circle img-thumbnail shadow-sm" style="width: 140px; height: 140px; object-fit: cover;">
+                                        <div class="small text-muted mt-2">Vista previa de la imagen</div>
+                                    </div>
+
+                                                                       <!-- Opción 1: Galería Visual de Avatares -->
+                                    <div class="form-group text-left mb-3">
+                                        <label class="small font-weight-bold"><i class="fas fa-palette mr-1 text-primary"></i> 1. Haz clic en el avatar que más te guste:</label>
+                                        <div class="d-flex flex-wrap justify-content-center p-2 mb-2 bg-light rounded border" id="galeria-avatares" style="gap: 10px; max-height: 150px; overflow-y: auto;">
+                                            <img src="img/undraw_profile_2.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chico Ilustrado" data-src="img/undraw_profile_2.svg">
+                                            <img src="img/undraw_profile_1.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chica Ilustrada" data-src="img/undraw_profile_1.svg">
+                                            <img src="img/undraw_profile_3.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Con Lentes" data-src="img/undraw_profile_3.svg">
+                                            <img src="img/undraw_profile.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Azul Clásico" data-src="img/undraw_profile.svg">
+                                            <img src="img/imgzeus.png" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Zeus" data-src="img/imgzeus.png">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Sonriente" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Gamer" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Ejecutiva" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chico Gorra" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo">
+                                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Robot" data-src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus">
+                                            <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Pixel Art" data-src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario">
+                                            <img src="https://api.dicebear.com/7.x/personas/svg?seed=Alex" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Moderno" data-src="https://api.dicebear.com/7.x/personas/svg?seed=Alex">
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Cliente" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Clienta" data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Ejecutivo" data-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150">
+                                        </div>
+                                    </div>
+
+                                    <!-- Opción 2: URL de internet -->
+                                    <div class="form-group text-left mb-3">
+                                        <label class="small font-weight-bold"><i class="fas fa-link mr-1"></i> 2. O pegar enlace URL:</label>
+                                        <input type="url" id="avatar-url" class="form-control form-control-sm" placeholder="https://ejemplo.com/foto.jpg">
+                                    </div>
+
+                                    <!-- Opción 3: Examinar archivo local -->
+                                    <div class="form-group text-left mb-2">
+                                        <label class="small font-weight-bold"><i class="fas fa-folder-open mr-1"></i> 3. O subir archivo desde tu PC:</label>
+                                        <input type="file" id="avatar-file" class="form-control-file small" accept="image/*">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                      
                     </div>
 
                 </div>
@@ -322,15 +399,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-out-alt text-danger mr-2"></i>¿Cerrar Sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si estás listo para salir del sistema.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-sm" href="login.html">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
@@ -346,12 +423,137 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Los estudiantes deben agregar aquí el JavaScript -->
+    <!-- Lógica sencilla de Creación de Cliente -->
     <script>
-        // TODO: Implementar POST a /api/clientes con los datos del formulario
-        // El formulario ya tiene el ID "formulario-cliente" y los inputs tienen IDs específicos
-    </script>
+        // Guardar la imagen elegida
+        let imagenSeleccionada = 'img/undraw_profile_2.svg';
 
+        const avatarPreview = document.getElementById('avatar-preview');
+        const inputUrl = document.getElementById('avatar-url');
+        const inputFile = document.getElementById('avatar-file');
+        const itemsGaleria = document.querySelectorAll('.avatar-item');
+
+        // 1. Clic en avatar de la galería
+        itemsGaleria.forEach(item => {
+            item.addEventListener('click', () => {
+                imagenSeleccionada = item.getAttribute('data-src');
+                avatarPreview.src = imagenSeleccionada;
+                inputUrl.value = '';
+                inputFile.value = '';
+
+                // Resaltar seleccionado
+                itemsGaleria.forEach(i => i.style.border = '1px solid #dee2e6');
+                item.style.border = '3px solid #4e73df';
+            });
+        });
+
+        // 2. Si escribe o pega un link URL
+        inputUrl.addEventListener('input', () => {
+            if (inputUrl.value.trim() !== '') {
+                imagenSeleccionada = inputUrl.value.trim();
+                avatarPreview.src = imagenSeleccionada;
+                inputFile.value = '';
+                itemsGaleria.forEach(i => i.style.border = '1px solid #dee2e6');
+            }
+        });
+
+        // Función para optimizar y procesar imagen subida
+        function procesarArchivoImagen(archivo, callback) {
+            if (!archivo) return;
+            const lector = new FileReader();
+            lector.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const maxSize = 400;
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height = Math.round(height * (maxSize / width));
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width = Math.round(width * (maxSize / height));
+                            height = maxSize;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                    callback(dataUrl);
+                };
+                img.onerror = () => {
+                    callback(e.target.result);
+                };
+                img.src = e.target.result;
+            };
+            lector.readAsDataURL(archivo);
+        }
+
+        // 3. Si examina y sube un archivo desde el computador / navegador
+        inputFile.addEventListener('change', () => {
+            const archivo = inputFile.files[0];
+            if (archivo) {
+                procesarArchivoImagen(archivo, (dataUrl) => {
+                    imagenSeleccionada = dataUrl;
+                    avatarPreview.src = imagenSeleccionada;
+                    inputUrl.value = '';
+                    itemsGaleria.forEach(i => i.style.border = '1px solid #dee2e6');
+                });
+            }
+        });
+
+        // 4. Enviar formulario a la API
+        const formularioCliente = document.getElementById('formulario-cliente');
+        formularioCliente.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombre-cli').value.trim();
+            const apellido = document.getElementById('apellido-cli').value.trim();
+            const email = document.getElementById('email-cli').value.trim();
+            const celular = document.getElementById('celular-cli').value.trim();
+            const direccion = document.getElementById('direccion-cli').value.trim();
+            const direccion2 = document.getElementById('direccion2-cli').value.trim();
+            const descripcion = document.getElementById('descripcion-cli').value.trim();
+
+            const datosCliente = {
+                nombre: nombre,
+                apellido: apellido,
+                email: email,
+                celular: celular,
+                direccion: direccion,
+                direccion2: direccion2,
+                descripcion: descripcion,
+                imagen: imagenSeleccionada
+            };
+
+            try {
+                const respuesta = await fetch('http://localhost:3000/api/clientes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosCliente)
+                });
+
+                const resultado = await respuesta.json();
+
+                if (respuesta.ok) {
+                    alert('¡Cliente registrado con éxito!');
+                    window.location.href = 'listado-clientes.html';
+                } else {
+                    alert('Error: ' + (resultado.message || 'No se pudo crear el cliente'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor backend.');
+            }
+        });
+    </script>
 </body>
 
 </html>

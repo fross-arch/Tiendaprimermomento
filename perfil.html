@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UACompatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mi Perfil - Tienda</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/panel.css" rel="stylesheet"> 
+    <script src="js/local.js"></script>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15 mr-2">
+                    <i class="fas fa-hamburger text-warning"></i>
+                </div>
+                <div class="sidebar-brand-text font-weight-bold" style="letter-spacing: 0.5px;">Pocheches Fast Food</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Panel de Control</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Módulos
+            </div>
+
+            <!-- Nav Item - Productos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProductos"
+                    aria-expanded="false" aria-controls="collapseProductos">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapseProductos" class="collapse" aria-labelledby="headingProductos" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-pro.html">Ver Productos</a>
+                        <a class="collapse-item" href="crear-pro.html">Crear Productos</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Clientes -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+                    aria-expanded="false" aria-controls="collapseClientes">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Clientes</span>
+                </a>
+                <div id="collapseClientes" class="collapse" aria-labelledby="headingClientes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-clientes.html">Ver Clientes</a>
+                        <a class="collapse-item" href="crear-cliente.html">Crear Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Pedidos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePedidos"
+                    aria-expanded="false" aria-controls="collapsePedidos">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Pedidos</span>
+                </a>
+                <div id="collapsePedidos" class="collapse" aria-labelledby="headingPedidos" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-pedidos.html">Ver Pedidos</a>
+                        <a class="collapse-item" href="crear-pedido.html">Crear Pedidos</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Usuarios -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
+                    aria-expanded="true" aria-controls="collapseUsuarios">
+                    <i class="fas fa-fw fa-user-tie"></i>
+                    <span>Usuarios</span>
+                </a>
+                <div id="collapseUsuarios" class="collapse show" aria-labelledby="headingUsuarios" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-usuarios.html">Ver Usuarios</a>
+                        <a class="collapse-item active" href="crear-usuario.html">Crear Usuarios</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar productos..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="nombreusuario" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img id="imagenPerfil" class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg" style="object-fit: cover;">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="perfil.html">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <button id="logoutButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
+                                    Cerrar Sesión
+                                </button>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-user-circle text-primary mr-2"></i>Mi Perfil</h1>
+                        <a href="index.html" class="btn btn-sm btn-secondary shadow-sm">
+                            <i class="fas fa-arrow-left fa-sm mr-1"></i> Volver al Inicio
+                        </a>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Tarjeta de Resumen Visual (Izquierda) -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card shadow border-0 text-center py-4">
+                                <div class="card-body">
+                                    <div class="position-relative d-inline-block mb-3">
+                                        <img id="card-perfil-img" src="img/undraw_profile.svg" class="rounded-circle img-thumbnail shadow-sm" style="width: 130px; height: 130px; object-fit: cover;">
+                                    </div>
+                                    <h4 id="card-perfil-nombre" class="font-weight-bold text-gray-900 mb-1">Cargando...</h4>
+                                    <div id="card-perfil-badge" class="mb-3">
+                                        <span class="badge badge-primary px-3 py-2 text-uppercase">Cargando</span>
+                                    </div>
+                                    <p id="card-perfil-email" class="text-muted small mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Formulario de Edición de Perfil (Derecha) -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="card shadow border-0">
+                                <div class="card-header py-3 bg-white border-bottom">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user-edit mr-1"></i> Actualizar Información Personal</h6>
+                                </div>
+                                <div class="card-body p-4">
+                                    <form id="formulario-perfil">
+
+                                        <!-- Campos Básicos -->
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <label class="small font-weight-bold text-gray-700">Nombre / Usuario:</label>
+                                                <input type="text" id="perfil-nombre" class="form-control" required>
+                                            </div>
+                                            <div class="col-md-6 form-group" id="grupo-apellido">
+                                                <label class="small font-weight-bold text-gray-700">Apellido:</label>
+                                                <input type="text" id="perfil-apellido" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <!-- Campos Adicionales para Clientes -->
+                                        <div id="campos-cliente" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    <label class="small font-weight-bold text-gray-700">Correo Electrónico:</label>
+                                                    <input type="email" id="perfil-email" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    <label class="small font-weight-bold text-gray-700">Celular / Teléfono:</label>
+                                                    <input type="tel" id="perfil-celular" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small font-weight-bold text-gray-700">Dirección de Entrega:</label>
+                                                <input type="text" id="perfil-direccion" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <hr class="my-4">
+
+                                        <!-- Cambio de Contraseña -->
+                                        <h6 class="font-weight-bold text-gray-800 mb-3"><i class="fas fa-key mr-1 text-warning"></i> Cambiar Contraseña (Opcional)</h6>
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <label class="small font-weight-bold text-gray-700">Nueva Contraseña:</label>
+                                                <input type="password" id="perfil-password" class="form-control" placeholder="Dejar en blanco para mantener actual">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label class="small font-weight-bold text-gray-700">Confirmar Nueva Contraseña:</label>
+                                                <input type="password" id="perfil-repeat-password" class="form-control" placeholder="Repetir nueva contraseña">
+                                            </div>
+                                        </div>
+
+                                        <hr class="my-4">
+
+                                        <!-- Selector de Foto de Perfil -->
+                                        <h6 class="font-weight-bold text-gray-800 mb-3"><i class="fas fa-camera mr-1 text-info"></i> Foto de Perfil</h6>
+                                        
+                                        <!-- Galería Visual de Avatares -->
+                                        <div class="form-group">
+                                            <label class="small font-weight-bold text-muted mb-2"><i class="fas fa-palette mr-1 text-primary"></i> Elige un diseño rápido:</label>
+                                            <div class="d-flex flex-wrap p-2 bg-light rounded border" style="gap: 8px;">
+                                                <img src="img/pochechefastfood.jpg" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Pocheches Fast Food Logo" data-src="img/pochechefastfood.jpg">
+                                                <img src="img/undraw_profile.svg" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Azul Clásico" data-src="img/undraw_profile.svg">
+                                                <img src="img/imgzeus.png" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Zeus" data-src="img/imgzeus.png">
+                                                <img src="img/undraw_profile_1.svg" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Chica Ilustrada" data-src="img/undraw_profile_1.svg">
+                                                <img src="img/undraw_profile_2.svg" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Chico Ilustrado" data-src="img/undraw_profile_2.svg">
+                                                <img src="img/undraw_profile_3.svg" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Con Lentes" data-src="img/undraw_profile_3.svg">
+                                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Robot" data-src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Gamer" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Ejecutiva" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Chico Gorra" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Sonriente" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe">
+                                                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Pixel Art" data-src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario">
+                                                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Foto Chico" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150">
+                                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" class="perfil-avatar-item rounded-circle border shadow-sm" style="width: 38px; height: 38px; object-fit: cover; cursor: pointer;" title="Foto Chica" data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150">
+                                            </div>
+                                        </div>
+
+                                        <!-- URL o Archivo PC -->
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <label class="small font-weight-bold text-muted">O pegar URL de imagen:</label>
+                                                <input type="url" id="perfil-url" class="form-control form-control-sm" placeholder="https://...">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label class="small font-weight-bold text-muted">O subir archivo de tu PC:</label>
+                                                <input type="file" id="perfil-file" class="form-control-file small" accept="image/*">
+                                            </div>
+                                        </div>
+
+                                        <div class="text-right mt-4">
+                                            <button type="submit" class="btn btn-primary btn-md font-weight-bold px-4">
+                                                <i class="fas fa-save mr-1"></i> Guardar Cambios
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-out-alt text-danger mr-2"></i>¿Cerrar Sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si estás listo para salir del sistema.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-sm" href="login.html">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Lógica sencilla de Creación de Usuario -->
+    
+    <script>
+        let imagenPerfilSeleccionada = '';
+        let currentUser = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarDatosPerfil();
+            configurarEventosAvatar();
+        });
+
+        // 1. Cargar datos del usuario actual
+        async function cargarDatosPerfil() {
+            currentUser = JSON.parse(localStorage.getItem('userLogin'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const rol = (currentUser.rol || '').toLowerCase();
+            const esCliente = (rol === 'cliente');
+
+            imagenPerfilSeleccionada = currentUser.imagen || 'img/undraw_profile.svg';
+
+            // Actualizar Tarjeta Izquierda
+            document.getElementById('card-perfil-img').src = imagenPerfilSeleccionada;
+            document.getElementById('card-perfil-nombre').textContent = currentUser.usuario || 'Usuario';
+            
+            const badge = document.getElementById('card-perfil-badge');
+            const rolTexto = rol.charAt(0).toUpperCase() + rol.slice(1);
+            let badgeClass = 'badge-primary';
+            if (rol === 'administrador') badgeClass = 'badge-danger';
+            else if (rol === 'vendedor') badgeClass = 'badge-success';
+            else if (rol === 'cajero') badgeClass = 'badge-warning';
+            else if (rol === 'cliente') badgeClass = 'badge-info';
+
+            badge.innerHTML = '<span class="badge ' + badgeClass + ' px-3 py-2 text-uppercase font-weight-bold">' + rolTexto + '</span>';
+
+            // Formulario
+            if (esCliente) {
+                document.getElementById('campos-cliente').style.display = 'block';
+                document.getElementById('grupo-apellido').style.display = 'block';
+
+                const partesNombre = (currentUser.usuario || '').split(' ');
+                document.getElementById('perfil-nombre').value = partesNombre[0] || '';
+                document.getElementById('perfil-apellido').value = partesNombre.slice(1).join(' ') || '';
+                document.getElementById('perfil-email').value = currentUser.email || '';
+
+                if (currentUser.id) {
+                    try {
+                        const res = await fetch('http://localhost:3000/api/clientes/' + currentUser.id);
+                        if (res.ok) {
+                            const clienteDB = await res.json();
+                            document.getElementById('perfil-nombre').value = clienteDB.nombre || '';
+                            document.getElementById('perfil-apellido').value = clienteDB.apellido || '';
+                            document.getElementById('perfil-email').value = clienteDB.email || '';
+                            document.getElementById('perfil-celular').value = clienteDB.celular || '';
+                            document.getElementById('perfil-direccion').value = clienteDB.direccion || '';
+                            if (clienteDB.imagen) {
+                                imagenPerfilSeleccionada = clienteDB.imagen;
+                                document.getElementById('card-perfil-img').src = imagenPerfilSeleccionada;
+                            }
+                            document.getElementById('card-perfil-email').textContent = clienteDB.email || '';
+                        }
+                    } catch (err) {
+                        console.error('Error al obtener cliente DB:', err);
+                    }
+                }
+            } else {
+                document.getElementById('campos-cliente').style.display = 'none';
+                document.getElementById('grupo-apellido').style.display = 'none';
+                document.getElementById('perfil-nombre').value = currentUser.usuario || '';
+            }
+        }
+
+        // 2. Selección de foto de perfil
+        function configurarEventosAvatar() {
+            const previewCard = document.getElementById('card-perfil-img');
+            const inputUrl = document.getElementById('perfil-url');
+            const inputFile = document.getElementById('perfil-file');
+
+            document.querySelectorAll('.perfil-avatar-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    imagenPerfilSeleccionada = item.getAttribute('data-src');
+                    previewCard.src = imagenPerfilSeleccionada;
+                    inputUrl.value = '';
+                    inputFile.value = '';
+                });
+            });
+
+            inputUrl.addEventListener('input', () => {
+                if (inputUrl.value.trim() !== '') {
+                    imagenPerfilSeleccionada = inputUrl.value.trim();
+                    previewCard.src = imagenPerfilSeleccionada;
+                    inputFile.value = '';
+                }
+            });
+
+            inputFile.addEventListener('change', () => {
+                const archivo = inputFile.files[0];
+                if (archivo) {
+                    const lector = new FileReader();
+                    lector.onload = (e) => {
+                        imagenPerfilSeleccionada = e.target.result;
+                        previewCard.src = imagenPerfilSeleccionada;
+                        inputUrl.value = '';
+                    };
+                    lector.readAsDataURL(archivo);
+                }
+            });
+        }
+
+        // 3. Guardar cambios en el perfil
+        document.getElementById('formulario-perfil').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const password = document.getElementById('perfil-password').value;
+            const repeatPassword = document.getElementById('perfil-repeat-password').value;
+
+            if (password && password !== repeatPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            const rol = (currentUser.rol || '').toLowerCase();
+            const esCliente = (rol === 'cliente');
+
+            try {
+                if (esCliente) {
+                    const nombre = document.getElementById('perfil-nombre').value.trim();
+                    const apellido = document.getElementById('perfil-apellido').value.trim();
+                    const email = document.getElementById('perfil-email').value.trim();
+                    const celular = document.getElementById('perfil-celular').value.trim();
+                    const direccion = document.getElementById('perfil-direccion').value.trim();
+
+                    const datosActualizar = {
+                        nombre,
+                        apellido,
+                        email,
+                        celular,
+                        direccion,
+                        direccion2: '',
+                        descripcion: '',
+                        imagen: imagenPerfilSeleccionada
+                    };
+
+                    if (password) {
+                        datosActualizar.contrasena = password;
+                    }
+
+                    const res = await fetch('http://localhost:3000/api/clientes/' + currentUser.id, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(datosActualizar)
+                    });
+
+                    if (res.ok) {
+                        currentUser.usuario = (nombre + ' ' + apellido).trim();
+                        currentUser.email = email;
+                        currentUser.imagen = imagenPerfilSeleccionada;
+                        localStorage.setItem('userLogin', JSON.stringify(currentUser));
+
+                        alert('¡Perfil de cliente actualizado con éxito!');
+                        window.location.reload();
+                    } else {
+                        const err = await res.json();
+                        alert('Error: ' + (err.message || 'No se pudo actualizar el perfil'));
+                    }
+                } else {
+                    const nuevoUsuario = document.getElementById('perfil-nombre').value.trim();
+                    const datosActualizar = {
+                        rol: currentUser.rol,
+                        usuario: nuevoUsuario,
+                        imagen: imagenPerfilSeleccionada
+                    };
+
+                    if (password) {
+                        datosActualizar.contrasena = password;
+                    }
+
+                    const res = await fetch('http://localhost:3000/api/usuarios/' + currentUser.id, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(datosActualizar)
+                    });
+
+                    if (res.ok) {
+                        currentUser.usuario = nuevoUsuario;
+                        currentUser.imagen = imagenPerfilSeleccionada;
+                        localStorage.setItem('userLogin', JSON.stringify(currentUser));
+
+                        alert('¡Perfil actualizado con éxito!');
+                        window.location.reload();
+                    } else {
+                        const err = await res.json();
+                        alert('Error: ' + (err.message || 'No se pudo actualizar el perfil'));
+                    }
+                }
+            } catch (error) {
+                console.error('Error al actualizar perfil:', error);
+                alert('Error al conectar con el servidor backend');
+            }
+        });
+    </script>
+</body>
+</html>
