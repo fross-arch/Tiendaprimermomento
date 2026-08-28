@@ -17,6 +17,13 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
  <link href="css/panel.css" rel="stylesheet"> 
+ <style>
+    .img-miniatura-pro {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+    }
+</style>
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -146,19 +153,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -347,13 +341,28 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Inventario Productos</h1>
                         <a href="crear-pro.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-plus fa-sm text-white-50"></i> Crear Producto</a>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
+                        <!-- Filtro por categoría -->
+                        <ul class="nav nav-pills mb-3" id="categoria-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" data-categoria="Todas">Todas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-categoria="Comidas">Comidas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-categoria="Bebidas">Bebidas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-categoria="Postres">Postres</a>
+                            </li>
+                        </ul>
                          <!--================== tabla aqui ===========================--> 
                          <div class="input-group mb-3 rounded-pill overflow-hidden border w-50">
                             <span class="input-group-text bg-white border-0 pe-1" id="basic-addon1">
