@@ -4,18 +4,7 @@
     display: none !important;
 }
 
-#alertsDropdown,.parent(),
 li:has(#alertsDropdown),
 li:has(#messagesDropdown) {
     display: none !important;
-}
-/* Oculta el texto dentro de los enlaces de la barra lateral */
-.nav-item .nav-link span {
-    font-size: 0 !important; /* Oculta el texto 'Dashboard' original */
-}
-
-/* Agrega el nuevo texto 'Panel de control' */
-.nav-item .nav-link span::after {
-    content: "Panel de Control";
-    font-size: 0.85rem; /* Restaura el tamaño de fuente normal */
-}
+}

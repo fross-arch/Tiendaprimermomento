@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Inventario - Register</title>
+    <title>Inventario - Registro de Clientes</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 
 </head>
 
@@ -34,50 +30,75 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-2 font-weight-bold">¡Crea tu Cuenta en Pocheches Fast Food!</h1>
+                                <p class="text-muted small mb-4">Regístrate para realizar y consultar tus pedidos</p>
                             </div>
-                            <form class="user">
+                            <form class="user" id="form-registro-cliente">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                        <input type="text" class="form-control form-control-user" id="reg-nombre"
+                                            placeholder="Nombre" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                        <input type="text" class="form-control form-control-user" id="reg-apellido"
+                                            placeholder="Apellido" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="email" class="form-control form-control-user" id="reg-email"
+                                            placeholder="Correo Electrónico" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="tel" class="form-control form-control-user" id="reg-celular"
+                                            placeholder="Celular / Teléfono" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="text" class="form-control form-control-user" id="reg-direccion"
+                                        placeholder="Dirección de entrega" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            id="reg-password" placeholder="Contraseña" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                            id="reg-repeat-password" placeholder="Repetir Contraseña" required>
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+
+                                <!-- Selector de Avatar para el Cliente -->
+                                <div class="card p-3 mb-3 bg-light border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-3 text-center">
+                                            <img id="reg-preview" src="img/undraw_profile.svg" class="rounded-circle border shadow-sm" style="width: 55px; height: 55px; object-fit: cover;">
+                                        </div>
+                                        <div class="col-9">
+                                            <label class="small font-weight-bold mb-1"><i class="fas fa-palette mr-1 text-primary"></i> Elige tu Avatar:</label>
+                                            <div class="d-flex flex-wrap" style="gap: 5px;">
+                                                <img src="img/pochechefastfood.jpg" class="reg-avatar rounded-circle border shadow-sm" style="width: 28px; height: 28px; object-fit: cover; cursor: pointer;" title="Pocheches Logo" data-src="img/pochechefastfood.jpg">
+                                                <img src="img/undraw_profile.svg" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="img/undraw_profile.svg">
+                                                <img src="img/undraw_profile_1.svg" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="img/undraw_profile_1.svg">
+                                                <img src="img/undraw_profile_2.svg" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="img/undraw_profile_2.svg">
+                                                <img src="img/undraw_profile_3.svg" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="img/undraw_profile_3.svg">
+                                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Client" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="https://api.dicebear.com/7.x/bottts/svg?seed=Client">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka">
+                                                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="reg-avatar rounded-circle border" style="width: 28px; height: 28px; cursor: pointer;" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-user btn-block font-weight-bold">
+                                    <i class="fas fa-check mr-1"></i> Registrarme e Ingresar
+                                </button>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small font-weight-bold text-primary" href="login.html">¿Ya tienes cuenta? ¡Inicia Sesión!</a>
                             </div>
                         </div>
                     </div>
@@ -94,8 +115,79 @@
     <!-- Core plugin JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        let imagenSeleccionada = 'img/undraw_profile.svg';
+
+        // Selección de avatar
+        document.querySelectorAll('.reg-avatar').forEach(img => {
+            img.addEventListener('click', () => {
+                imagenSeleccionada = img.getAttribute('data-src');
+                document.getElementById('reg-preview').src = imagenSeleccionada;
+            });
+        });
+
+        // Enviar formulario de registro
+        document.getElementById('form-registro-cliente').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nombre = document.getElementById('reg-nombre').value.trim();
+            const apellido = document.getElementById('reg-apellido').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const celular = document.getElementById('reg-celular').value.trim();
+            const direccion = document.getElementById('reg-direccion').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const repeatPassword = document.getElementById('reg-repeat-password').value;
+
+            if (password !== repeatPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            const nuevoCliente = {
+                nombre,
+                apellido,
+                email,
+                contrasena: password,
+                celular,
+                direccion,
+                direccion2: '',
+                descripcion: 'Cliente registrado desde la web',
+                imagen: imagenSeleccionada
+            };
+
+            try {
+                const res = await fetch('http://localhost:3000/api/clientes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(nuevoCliente)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert('¡Registro exitoso! Iniciando sesión...');
+                    // Iniciar sesión automáticamente
+                    const loginRes = await fetch('http://localhost:3000/api/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ usuario: email, contrasena: password })
+                    });
+                    if (loginRes.ok) {
+                        const userRegistered = await loginRes.json();
+                        localStorage.setItem('userLogin', JSON.stringify(userRegistered));
+                        window.location.href = 'index.html';
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                } else {
+                    alert('Error: ' + (data.message || 'No se pudo completar el registro'));
+                }
+            } catch (error) {
+                console.error('Error al registrar cliente:', error);
+                alert('Error al conectar con el servidor backend');
+            }
+        });
+    </script>
 
 </body>
 

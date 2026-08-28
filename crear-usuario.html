@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UACompatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Admin - Crear Usuario</title>
+    <title>Pocheches Fast Food - Crear Usuario</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
- <link href="css/panel.css" rel="stylesheet"> 
-
+    <link href="css/panel.css" rel="stylesheet"> 
+    <script src="js/local.js"></script>
 </head>
 
 <body id="page-top">
@@ -32,11 +26,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15 mr-2">
+                    <i class="fas fa-hamburger text-warning"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Tienda</div>
+                <div class="sidebar-brand-text font-weight-bold" style="letter-spacing: 0.5px;">Pocheches Fast Food</div>
             </a>
 
             <!-- Divider -->
@@ -46,7 +40,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Panel de Control</span></a>
             </li>
 
             <!-- Divider -->
@@ -106,8 +100,8 @@
             </li>
 
             <!-- Nav Item - Usuarios -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
                     aria-expanded="true" aria-controls="collapseUsuarios">
                     <i class="fas fa-fw fa-user-tie"></i>
                     <span>Usuarios</span>
@@ -116,7 +110,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="listado-usuarios.html">Ver Usuarios</a>
-                        <a class="collapse-item active" href="crear-usuario.html">Crear Usuarios</a>
+                        <a class="collapse-item active font-weight-bold text-primary" href="crear-usuario.html">Crear Usuarios</a>
                     </div>
                 </div>
             </li>
@@ -148,12 +142,12 @@
 
                     <!-- Topbar Search -->
                     <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search position-relative" id="topbar-search-form" onsubmit="return false;">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" id="topbar-search-input" placeholder="Buscar productos..."
+                                aria-label="Buscar" aria-describedby="basic-addon2" autocomplete="off">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button" id="topbar-search-btn">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -163,42 +157,29 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span id="nombreusuario" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img id="imagenPerfil" class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg" style="object-fit: cover;">
                             </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="perfil.html">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <button id="logoutButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
+                                    Cerrar Sesión
+                                </button>
+                            </div>
                         </li>
 
                     </ul>
@@ -211,51 +192,115 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Crear Usuario</h1>
-                        <a href="listado-usuarios.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-list fa-sm text-white-50"></i> Listado </a>
+                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-user-plus text-primary mr-2"></i>Crear Nuevo Usuario (Roles)</h1>
+                        <a href="listado-usuarios.html" class="btn btn-sm btn-secondary shadow-sm">
+                            <i class="fas fa-list fa-sm mr-1"></i> Ver Usuarios
+                        </a>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-8">
-                            <form id="formulario-usuario">
-                          
-                                <!-- Rol select -->
-                                <div class="form-outline mb-4">
-                                    <select id="rol" class="form-control" required>
-                                        <option selected>Seleccionar Rol</option>
-                                        <option value="administrador">Administrador</option>
-                                        <option value="vendedor">Vendedor</option>
-                                        <option value="cajero">Cajero</option>
-                                    </select>
-                                    <label class="form-label" for="rol">Rol</label>
-                                </div>
 
-                                <!-- Usuario input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="usuario" class="form-control" required />
-                                    <label class="form-label" for="usuario">Nombre Usuario</label>
+                        <!-- Formulario de Crear Usuario -->
+                        <div class="col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Datos del Usuario</h6>
                                 </div>
-    
-                                <!-- Contraseña input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="contrasena" class="form-control" required />
-                                    <label class="form-label" for="contrasena">Contraseña</label>
-                                </div>
+                                <div class="card-body">
+                                    <form id="formulario-usuario">
+                                   
+                                        <!-- Rol select -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="rol">Rol del Usuario:</label>
+                                            <select id="rol" class="form-control" required>
+                                                <option value="" selected disabled>Seleccionar Rol...</option>
+                                                <option value="administrador">Administrador</option>
+                                                <option value="vendedor">Vendedor</option>
+                                                <option value="cajero">Cajero</option>
+                                            </select>
+                                        </div>
 
-                                <!-- Confirmar contraseña input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="confirmar_contrasena" class="form-control" required />
-                                    <label class="form-label" for="confirmar_contrasena">Confirmar Contraseña</label>
+                                        <!-- Usuario input -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="usuario">Nombre de Usuario (Login):</label>
+                                            <input type="text" id="usuario" class="form-control" placeholder="Ej: juancarlos" required />
+                                        </div>
+            
+                                        <!-- Contraseña input -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="contrasena">Contraseña:</label>
+                                            <input type="password" id="contrasena" class="form-control" placeholder="********" required />
+                                        </div>
+
+                                        <!-- Confirmar contraseña input -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold" for="confirmar_contrasena">Confirmar Contraseña:</label>
+                                            <input type="password" id="confirmar_contrasena" class="form-control" placeholder="********" required />
+                                        </div>
+                                    
+                                        <!-- Submit button -->
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            <i class="fas fa-user-plus mr-1"></i> Guardar Usuario
+                                        </button>
+                                    </form>
                                 </div>
-                            
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4">Crear Usuario</button>
-                            </form>
+                            </div>
+                        </div>
+
+                        <!-- Selector de Imagen -->
+                        <div class="col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Foto de Perfil</h6>
+                                </div>
+                                <div class="card-body text-center">
+                                    <!-- Vista previa -->
+                                    <div class="mb-3">
+                                        <img id="avatar-preview" src="img/undraw_profile.svg" class="img-profile rounded-circle img-thumbnail shadow-sm" style="width: 140px; height: 140px; object-fit: cover;">
+                                        <div class="small text-muted mt-2">Vista previa de la imagen</div>
+                                    </div>
+
+                                    <hr>
+
+                                    <!-- Opción 1: Galería Visual de Avatares -->
+                                    <div class="form-group text-left mb-3">
+                                        <label class="small font-weight-bold"><i class="fas fa-palette mr-1 text-primary"></i> 1. Haz clic en el avatar que más te guste:</label>
+                                        <div class="d-flex flex-wrap justify-content-center p-2 mb-2 bg-light rounded border" id="galeria-avatares" style="gap: 10px; max-height: 150px; overflow-y: auto;">
+                                            <img src="img/pochechefastfood.jpg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Pocheches Fast Food Logo" data-src="img/pochechefastfood.jpg">
+                                            <img src="img/undraw_profile.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Azul Clásico" data-src="img/undraw_profile.svg">
+                                            <img src="img/imgzeus.png" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Zeus" data-src="img/imgzeus.png">
+                                            <img src="img/undraw_profile_1.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chica Ilustrada" data-src="img/undraw_profile_1.svg">
+                                            <img src="img/undraw_profile_2.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chico Ilustrado" data-src="img/undraw_profile_2.svg">
+                                            <img src="img/undraw_profile_3.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Con Lentes" data-src="img/undraw_profile_3.svg">
+                                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Robot" data-src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Gamer" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Ejecutiva" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chico Gorra" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Sonriente" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe">
+                                            <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Pixel Art" data-src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario">
+                                            <img src="https://api.dicebear.com/7.x/personas/svg?seed=Alex" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Moderno" data-src="https://api.dicebear.com/7.x/personas/svg?seed=Alex">
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Chico" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Chica" data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Ejecutivo" data-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150">
+                                        </div>
+                                    </div>
+
+                                    <!-- Opción 2: URL de internet -->
+                                    <div class="form-group text-left mb-3">
+                                        <label class="small font-weight-bold"><i class="fas fa-link mr-1"></i> 2. O pegar enlace URL:</label>
+                                        <input type="url" id="avatar-url" class="form-control form-control-sm" placeholder="https://ejemplo.com/foto.jpg">
+                                    </div>
+
+                                    <!-- Opción 3: Examinar archivo local -->
+                                    <div class="form-group text-left mb-2">
+                                        <label class="small font-weight-bold"><i class="fas fa-folder-open mr-1"></i> 3. O subir archivo desde tu PC:</label>
+                                        <input type="file" id="avatar-file" class="form-control-file small" accept="image/*">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                      
                     </div>
 
                 </div>
@@ -268,7 +313,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                        <span>Copyright &copy; Pocheches Fast Food 2026</span>
                     </div>
                 </div>
             </footer>
@@ -291,15 +336,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-out-alt text-danger mr-2"></i>¿Cerrar Sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si estás listo para salir del sistema.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-sm" href="login.html">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
@@ -315,13 +360,136 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Los estudiantes deben agregar aquí el JavaScript -->
+    <!-- Lógica sencilla de Creación de Usuario -->
     <script>
-        // TODO: Implementar:
-        // 1. Validar que las contraseñas coincidan antes de enviar
-        // 2. POST a /api/usuarios con los datos del formulario (rol, usuario, contrasena)
-    </script>
+        // Guardar la imagen elegida (por defecto el avatar azul)
+        let imagenSeleccionada = 'img/undraw_profile.svg';
 
+        const avatarPreview = document.getElementById('avatar-preview');
+        const inputUrl = document.getElementById('avatar-url');
+        const inputFile = document.getElementById('avatar-file');
+        const itemsGaleria = document.querySelectorAll('.avatar-item');
+
+        // 1. Clic en cualquier avatar de la galería visual
+        itemsGaleria.forEach(item => {
+            item.addEventListener('click', () => {
+                imagenSeleccionada = item.getAttribute('data-src');
+                avatarPreview.src = imagenSeleccionada;
+                inputUrl.value = '';
+                inputFile.value = '';
+
+                // Resaltar seleccionado
+                itemsGaleria.forEach(i => i.style.border = '1px solid #dee2e6');
+                item.style.border = '3px solid #4e73df';
+            });
+        });
+
+        // 2. Si escribe o pega un link URL
+        inputUrl.addEventListener('input', () => {
+            if (inputUrl.value.trim() !== '') {
+                imagenSeleccionada = inputUrl.value.trim();
+                avatarPreview.src = imagenSeleccionada;
+                inputFile.value = '';
+                itemsGaleria.forEach(i => i.style.border = '1px solid #dee2e6');
+            }
+        });
+
+        // Función para optimizar y procesar imagen subida
+        function procesarArchivoImagen(archivo, callback) {
+            if (!archivo) return;
+            const lector = new FileReader();
+            lector.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const maxSize = 400;
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height = Math.round(height * (maxSize / width));
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width = Math.round(width * (maxSize / height));
+                            height = maxSize;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                    callback(dataUrl);
+                };
+                img.onerror = () => {
+                    callback(e.target.result);
+                };
+                img.src = e.target.result;
+            };
+            lector.readAsDataURL(archivo);
+        }
+
+        // 3. Si examina y sube un archivo desde el computador / navegador
+        inputFile.addEventListener('change', () => {
+            const archivo = inputFile.files[0];
+            if (archivo) {
+                procesarArchivoImagen(archivo, (dataUrl) => {
+                    imagenSeleccionada = dataUrl;
+                    avatarPreview.src = imagenSeleccionada;
+                    inputUrl.value = '';
+                    itemsGaleria.forEach(i => i.style.border = '1px solid #dee2e6');
+                });
+            }
+        });
+
+        // 4. Enviar formulario a la API
+        const formularioUsuario = document.getElementById('formulario-usuario');
+        formularioUsuario.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const rol = document.getElementById('rol').value;
+            const usuario = document.getElementById('usuario').value.trim();
+            const contrasena = document.getElementById('contrasena').value;
+            const confirmar_contrasena = document.getElementById('confirmar_contrasena').value;
+
+            // Validar contraseñas
+            if (contrasena !== confirmar_contrasena) {
+                alert('Las contraseñas no coinciden. Por favor verifica.');
+                return;
+            }
+
+            const datosUsuario = {
+                rol: rol,
+                usuario: usuario,
+                contrasena: contrasena,
+                imagen: imagenSeleccionada
+            };
+
+            try {
+                const respuesta = await fetch('http://localhost:3000/api/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosUsuario)
+                });
+
+                const resultado = await respuesta.json();
+
+                if (respuesta.ok) {
+                    alert('¡Usuario creado con éxito!');
+                    window.location.href = 'listado-usuarios.html';
+                } else {
+                    alert('Error: ' + (resultado.message || 'No se pudo crear el usuario'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor.');
+            }
+        });
+    </script>
 </body>
 
 </html>

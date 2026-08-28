@@ -53,16 +53,14 @@ try {
             return; // Corta la ejecución aquí para NO redirigir
         }
 
-let userRegistered = await respuesta.json();
-localStorage.setItem('userLogin', JSON.stringify(userRegistered));
-//console.log("El usuario registrado es: ", userRegistered);
-alert("Bienvenido " + userRegistered.rol);
-window.location.href = "../index.html";
-}catch (error) {
-    alert("error de conexion con el servidor");
-}
-
+        const userRegistered = await respuesta.json();
+        localStorage.setItem('userLogin', JSON.stringify(userRegistered));
+        
+        const rolTexto = userRegistered.rol ? (userRegistered.rol.charAt(0).toUpperCase() + userRegistered.rol.slice(1)) : 'Usuario';
+        alert(`¡Bienvenido ${rolTexto}: ${userRegistered.usuario}!`);
+        window.location.href = "index.html";
+    } catch (error) {
+        console.error("Error en login:", error);
+        alert("Error de conexión con el servidor");
+    }
 };
-
-
-

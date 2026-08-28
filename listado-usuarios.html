@@ -19,8 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
- <link href="css/panel.css" rel="stylesheet"> 
-
+    <link href="css/panel.css" rel="stylesheet"> 
+    <script src="js/local.js"></script>
 </head>
 
 <body id="page-top">
@@ -32,11 +32,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15 mr-2">
+                    <i class="fas fa-hamburger text-warning"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Tienda</div>
+                <div class="sidebar-brand-text font-weight-bold" style="letter-spacing: 0.5px;">Pocheches Fast Food</div>
             </a>
 
             <!-- Divider -->
@@ -46,7 +46,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Panel de Control</span></a>
             </li>
 
             <!-- Divider -->
@@ -150,7 +150,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar productos..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -195,10 +195,23 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span id="nombreusuario" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img id="imagenPerfil" class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg" style="object-fit: cover;">
                             </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="perfil.html">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <button id="logoutButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
+                                    Cerrar Sesión
+                                </button>
+                            </div>
                         </li>
 
                     </ul>
@@ -226,14 +239,13 @@
                               </svg>
                             </span>
                             <input type="search" class="form-control hide-focus border-0" placeholder="Buscar Usuario" aria-label="Username" aria-describedby="basic-addon1">
-                          </div> 
-                         <table class="table align-middle mb-0 bg-white">
+                          </div>                           <table class="table align-middle mb-0 bg-white table-hover">
                             <thead class="bg-light">
                               <tr>
                                 <th>#</th>
+                                <th>Foto</th>
                                 <th>Usuario</th>
                                 <th>Rol</th>
-                                <th>Creado</th>
                                 <th>Acciones</th>
                               </tr>
                             </thead>
@@ -277,16 +289,98 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-out-alt text-danger mr-2"></i>¿Cerrar Sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si estás listo para salir del sistema.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-sm" href="login.html">Cerrar Sesión</a>
                 </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Modal para Editar Usuario -->
+    <div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="modalEditarUsrLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalEditarUsrLabel"><i class="fas fa-user-edit mr-2"></i> Editar Usuario</h5>
+                    <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form id="formulario-editar-usuario">
+                    <div class="modal-body">
+                        <input type="hidden" id="edit-usr-id">
+                        
+                        <div class="row">
+                            <!-- Campos de texto -->
+                            <div class="col-md-7">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Rol:</label>
+                                    <select id="edit-usr-rol" class="form-control form-control-sm" required>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="vendedor">Vendedor</option>
+                                        <option value="cajero">Cajero</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Nombre de Usuario:</label>
+                                    <input type="text" id="edit-usr-usuario" class="form-control form-control-sm" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Nueva Contraseña (Opcional):</label>
+                                    <input type="password" id="edit-usr-contrasena" class="form-control form-control-sm" placeholder="Dejar en blanco para mantener la actual">
+                                </div>
+                            </div>
+
+                            <!-- Selector de Imagen en Modal -->
+                            <div class="col-md-5 text-center border-left">
+                                <label class="small font-weight-bold d-block">Foto de Perfil:</label>
+                                <img id="edit-usr-preview" src="img/undraw_profile.svg" class="img-profile rounded-circle img-thumbnail mb-2" style="width: 80px; height: 80px; object-fit: cover;">
+                                
+                                <div class="form-group text-left mb-2">
+                                    <label class="small font-weight-bold mb-1"><i class="fas fa-palette mr-1 text-primary"></i> Galería de Diseños:</label>
+                                    <div class="d-flex flex-wrap justify-content-center p-2 mb-2 bg-light rounded border" style="gap: 6px; max-height: 110px; overflow-y: auto;">
+                                        <img src="img/undraw_profile.svg" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Azul Clásico" data-src="img/undraw_profile.svg">
+                                        <img src="img/imgzeus.png" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Zeus" data-src="img/imgzeus.png">
+                                        <img src="img/undraw_profile_1.svg" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Chica Ilustrada" data-src="img/undraw_profile_1.svg">
+                                        <img src="img/undraw_profile_2.svg" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Chico Ilustrado" data-src="img/undraw_profile_2.svg">
+                                        <img src="img/undraw_profile_3.svg" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Con Lentes" data-src="img/undraw_profile_3.svg">
+                                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Robot" data-src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Gamer" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Ejecutiva" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Chico Gorra" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Sonriente" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe">
+                                        <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Pixel Art" data-src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario">
+                                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Foto Chico" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150">
+                                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" class="modal-usr-avatar-item rounded-circle border shadow-sm" style="width: 32px; height: 32px; object-fit: cover; cursor: pointer;" title="Foto Chica" data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150">
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-left mb-2">
+                                    <label class="small text-muted mb-0">URL externa:</label>
+                                    <input type="url" id="edit-usr-url" class="form-control form-control-sm" placeholder="https://...">
+                                </div>
+
+                                <div class="form-group text-left mb-0">
+                                    <label class="small text-muted mb-0">Archivo de PC:</label>
+                                    <input type="file" id="edit-usr-file" class="form-control-file small" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -301,12 +395,167 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Los estudiantes deben agregar aquí el JavaScript para cargar usuarios desde la API -->
+    <!-- Script para listar, editar y eliminar usuarios -->
     <script>
-        // TODO: Implementar carga de usuarios desde API GET /api/usuarios
-        // Mostrar en la tabla con botones de editar y eliminar
-    </script>
+        const tablaUsuarios = document.getElementById('tabla-usuarios');
+        let listaUsuariosCache = [];
+        let editUsrImagenSeleccionada = '';
 
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarUsuarios();
+            configurarEventosImagenUsuarioEdit();
+        });
+
+        // 1. Cargar lista de usuarios
+        async function cargarUsuarios() {
+            try {
+                const respuesta = await fetch('http://localhost:3000/api/usuarios');
+                const usuarios = await respuesta.json();
+                listaUsuariosCache = usuarios;
+
+                tablaUsuarios.innerHTML = '';
+
+                usuarios.forEach((usr, index) => {
+                    const fila = document.createElement('tr');
+                    const foto = usr.imagen || 'img/undraw_profile.svg';
+                    fila.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>
+                            <img src="${foto}" width="40" height="40" class="rounded-circle img-thumbnail" style="object-fit: cover;" onerror="this.src='img/undraw_profile.svg'">
+                        </td>
+                        <td><strong>${usr.usuario}</strong></td>
+                        <td><span class="badge badge-primary text-capitalize">${usr.rol}</span></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm mr-1" onclick="abrirModalEditarUsuario(${usr.id})" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${usr.id})" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tablaUsuarios.appendChild(fila);
+                });
+            } catch (error) {
+                console.error('Error al cargar usuarios:', error);
+            }
+        }
+
+        // 2. Abrir modal para editar
+        function abrirModalEditarUsuario(id) {
+            const usuario = listaUsuariosCache.find(u => u.id == id);
+            if (!usuario) return;
+
+            document.getElementById('edit-usr-id').value = usuario.id;
+            document.getElementById('edit-usr-rol').value = usuario.rol;
+            document.getElementById('edit-usr-usuario').value = usuario.usuario;
+            document.getElementById('edit-usr-contrasena').value = '';
+
+            editUsrImagenSeleccionada = usuario.imagen || 'img/undraw_profile.svg';
+            document.getElementById('edit-usr-preview').src = editUsrImagenSeleccionada;
+            document.getElementById('edit-usr-url').value = '';
+            document.getElementById('edit-usr-file').value = '';
+
+            $('#modalEditarUsuario').modal('show');
+        }
+
+        // 3. Configurar eventos de imagen en modal
+        function configurarEventosImagenUsuarioEdit() {
+            const preview = document.getElementById('edit-usr-preview');
+            const inputUrl = document.getElementById('edit-usr-url');
+            const inputFile = document.getElementById('edit-usr-file');
+            const items = document.querySelectorAll('.modal-usr-avatar-item');
+
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    editUsrImagenSeleccionada = item.getAttribute('data-src');
+                    preview.src = editUsrImagenSeleccionada;
+                    inputUrl.value = '';
+                    inputFile.value = '';
+                });
+            });
+
+            inputUrl.addEventListener('input', () => {
+                if (inputUrl.value.trim() !== '') {
+                    editUsrImagenSeleccionada = inputUrl.value.trim();
+                    preview.src = editUsrImagenSeleccionada;
+                    inputFile.value = '';
+                }
+            });
+
+            inputFile.addEventListener('change', () => {
+                const archivo = inputFile.files[0];
+                if (archivo) {
+                    const lector = new FileReader();
+                    lector.onload = (e) => {
+                        editUsrImagenSeleccionada = e.target.result;
+                        preview.src = editUsrImagenSeleccionada;
+                        inputUrl.value = '';
+                    };
+                    lector.readAsDataURL(archivo);
+                }
+            });
+        }
+
+        // 4. Guardar cambios (PUT)
+        document.getElementById('formulario-editar-usuario').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('edit-usr-id').value;
+            const rol = document.getElementById('edit-usr-rol').value;
+            const usuario = document.getElementById('edit-usr-usuario').value.trim();
+            const contrasena = document.getElementById('edit-usr-contrasena').value;
+
+            const datosActualizados = {
+                rol: rol,
+                usuario: usuario,
+                imagen: editUsrImagenSeleccionada
+            };
+
+            if (contrasena) {
+                datosActualizados.contrasena = contrasena;
+            }
+
+            try {
+                const respuesta = await fetch(`http://localhost:3000/api/usuarios/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datosActualizados)
+                });
+
+                if (respuesta.ok) {
+                    alert('Usuario actualizado con éxito');
+                    $('#modalEditarUsuario').modal('hide');
+                    cargarUsuarios();
+                } else {
+                    const error = await respuesta.json();
+                    alert('Error al actualizar: ' + (error.message || 'Intente nuevamente'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error al conectar con el servidor');
+            }
+        });
+
+        // 5. Eliminar usuario (DELETE)
+        async function eliminarUsuario(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+                try {
+                    const respuesta = await fetch(`http://localhost:3000/api/usuarios/${id}`, {
+                        method: 'DELETE'
+                    });
+                    if (respuesta.ok) {
+                        alert('Usuario eliminado con éxito');
+                        cargarUsuarios();
+                    } else {
+                        alert('No se pudo eliminar el usuario');
+                    }
+                } catch (error) {
+                    alert('Error al eliminar usuario');
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
