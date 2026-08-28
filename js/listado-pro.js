@@ -47,8 +47,8 @@ function renderProductos(lista) {
                 <img src="${pro.imagen}" class="img-thumbnail img-miniatura-pro" alt="${pro.nombre}">
             </td>
             <td>
-                <button class="btn btn-warning btn-sm btn-editar" data-id="${pro.id}">✍️ Edit</button>
-                <button class="btn btn-danger btn-sm btn-eliminar" data-id="${pro.id}">❌ Delete</button>
+                <button class="btn-editar" data-id="${pro.id}">✍️ Editar</button>
+                <button class="btn-eliminar" data-id="${pro.id}">❌ Eliminar</button>
             </td>
         `;
         listadoPro.appendChild(fila);
