@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Admin - Inventario</title>
+    <title>Pocheches Fast Food - Gestión de Productos</title>
+    
     <!--Favicon-->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
 
-
     <!-- Fuentes personalizadas para esta plantilla -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Estilos personalizados para esta plantilla -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
- <link href="css/panel.css" rel="stylesheet">
- <style>
-    .img-preview-producto {
-        width: 100%;
-        max-width: 400px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-</style>
+    <link href="css/panel.css" rel="stylesheet">
+    <script src="js/local.js"></script>
 
+    <style>
+        .img-preview-producto {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -44,22 +40,21 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Barra lateral - Marca -->
-            <!-- Barra lateral - Marca -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15 mr-2">
                     <i class="fas fa-hamburger text-warning"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Pocheches Fast Food</div>
+                <div class="sidebar-brand-text font-weight-bold" style="letter-spacing: 0.5px;">Pocheches Fast Food</div>
             </a>
 
             <!-- Separador -->
             <hr class="sidebar-divider my-0">
 
             <!-- Item de navegación - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Agregar Productos</span></a>
+                    <span>Panel de Control</span></a>
             </li>
 
             <!-- Separador -->
@@ -71,8 +66,8 @@
             </div>
 
             <!-- Item de navegación - Productos -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProductos"
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProductos"
                     aria-expanded="true" aria-controls="collapseProductos">
                     <i class="fas fa-fw fa-box"></i>
                     <span>Productos</span>
@@ -81,7 +76,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="listado-pro.html">Ver Productos</a>
-                        <a class="collapse-item active" href="crear-pro.html">Crear Productos</a>
+                        <a class="collapse-item active font-weight-bold text-primary" href="crear-pro.html" id="link-crear-sidebar">Crear Productos</a>
                     </div>
                 </div>
             </li>
@@ -159,180 +154,45 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search position-relative" id="topbar-search-form" onsubmit="return false;">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" id="topbar-search-input" placeholder="Buscar productos..."
+                                aria-label="Buscar" aria-describedby="basic-addon2" autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="topbar-search-btn">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
                     <!-- Navbar de la barra superior -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Item - Dropdown de búsqueda (visible solo en XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Mensajes -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Item - Alertas -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Contador - Alertas -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alertas -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Item - Mensajes -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Contador - Mensajes -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Mensajes -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Item - Información del usuario -->
+                        <!-- Item - Información del Usuario -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span id="nombreusuario" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img id="imagenPerfil" class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg" style="object-fit: cover;">
                             </a>
-                            <!-- Dropdown - Información del usuario -->
+                            <!-- Dropdown - Información de Usuario -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                <a class="dropdown-item" href="perfil.html">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    Perfil
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <button id="logoutButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
+                                    Cerrar Sesión
+                                </button>
                             </div>
                         </li>
 
@@ -346,87 +206,129 @@
 
                     <!-- Encabezado de la página -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800" id="titulo-form">Agregar Producto</h1>
-                        <a href="listado-pro.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-list fa-sm text-white-50"></i> Listado </a>
+                        <h1 class="h3 mb-0 text-gray-800" id="titulo-form">
+                            <i class="fas fa-plus-circle text-primary mr-2"></i>Agregar Producto
+                        </h1>
+                        <a href="listado-pro.html" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+                            <i class="fas fa-list fa-sm mr-1"></i> Ver Productos
+                        </a>
                     </div>
 
                     <!-- Fila de contenido -->
                     <div class="row">
-                        <div class="col-6">
-                            <form>
-                          
-                                <!-- Select de producto -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                <input list="productos-lista" id="productos-select" class="form-control" placeholder="Escribe o selecciona un producto" autocomplete="off">
-                                <datalist id="productos-lista">
-                                    <option value="Hamburguesa">
-                                    <option value="Picada">
-                                    <option value="Pasta">
-                                    <option value="Perro">
-                                    <option value="Sanchipapa">
-                                    <option value="Chuzo">
-                                    <option value="Pizza">
-                                    <option value="Pollo">
-                                    <option value="Tacos">
-                                    <option value="Burrito">
-                                </datalist>
-                                <label class="form-label" for="productos-select">Producto</label>
+                        <!-- Columna Formulario -->
+                        <div class="col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-edit mr-1"></i> Información del Producto</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="formulario-producto" onsubmit="return false;">
+                                  
+                                        <!-- Select de Producto -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="productos-select">Nombre del Producto:</label>
+                                            <select id="productos-select" class="form-control" required>
+                                                <option value="" disabled selected>-- Selecciona un producto o elige "Otro" --</option>
+                                                <option value="Hamburguesa">Hamburguesa</option>
+                                                <option value="Picada">Picada</option>
+                                                <option value="Pasta">Pasta</option>
+                                                <option value="Perro">Perro Caliente</option>
+                                                <option value="Salchipapa">Salchipapa</option>
+                                                <option value="Chuzo">Chuzo / Brocheta</option>
+                                                <option value="Pizza">Pizza</option>
+                                                <option value="Pollo">Pollo Frito</option>
+                                                <option value="Tacos">Tacos</option>
+                                                <option value="Burrito">Burrito</option>
+                                                <option value="Otro" class="font-weight-bold text-primary">✨ + Otro (Escribir producto nuevo)</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Campo adicional para Producto Personalizado (Se muestra solo al elegir "Otro") -->
+                                        <div class="form-group mb-3" id="contenedor-otro-producto" style="display: none;">
+                                            <label class="font-weight-bold text-primary" for="nombre-otro-producto">
+                                                <i class="fas fa-pen mr-1"></i> Escribe el nombre del nuevo producto:
+                                            </label>
+                                            <input type="text" id="nombre-otro-producto" class="form-control border-primary" placeholder="Ej: Refresco Coca-Cola, Jugo Natural, Tarta...">
+                                            <small class="form-text text-muted">Ingresa el nombre del producto que deseas agregar.</small>
+                                        </div>
+
+                                        <!-- Select de categoría -->
+                                        <div class="form-group mb-3">
+                                            <label class="font-weight-bold" for="categoria-select">Categoría:</label>
+                                            <select id="categoria-select" class="form-control" required>
+                                                <option value="" disabled selected>Seleccionar categoría...</option>
+                                                <option value="Comidas">Comidas</option>
+                                                <option value="Bebidas">Bebidas</option>
+                                                <option value="Postres">Postres</option>
+                                            </select>
+                                        </div>
+                                      
+                                        <!-- Precio y Stock en fila -->
+                                        <div class="form-row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="precio-pro">Precio ($ COP):</label>
+                                                <input type="number" id="precio-pro" class="form-control" placeholder="Ej: 25000" min="0" required />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="font-weight-bold" for="stock-pro">Stock Disponible:</label>
+                                                <input type="number" id="stock-pro" class="form-control" placeholder="Ej: 20" min="0" required />
+                                            </div>
+                                        </div>
+            
+                                        <!-- Input de descripción -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold" for="descripcion-pro">Descripción:</label>
+                                            <textarea class="form-control" id="descripcion-pro" rows="3" placeholder="Ingredientes, presentación o detalles..."></textarea>
+                                        </div>
+
+                                        <!-- Botón de enviar -->
+                                        <button type="button" id="btn-crear-producto" class="btn btn-primary btn-block font-weight-bold py-2 shadow-sm">
+                                            <i class="fas fa-save mr-1"></i> Guardar Producto
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                                <!-- Imagen del producto -->
-                                <div class="mb-4">
-                                    <label class="form-label d-block">Imagen del producto</label>
-
-                                    <!-- Opción 1: subir desde el dispositivo -->
-                                    <input type="file" id="imagen-file" accept="image/*" class="form-control mb-2">
-
-                                    <!-- Opción 2: pegar una URL de internet -->
-                                    <div class="input-group">
-                                        <input type="text" id="imagen-url" class="form-control" placeholder="O pega una URL de imagen aquí">
-                                        <button type="button" id="btn-cargar-url" class="btn btn-outline-secondary">Cargar</button>
-                                    </div>
-                                    <small class="text-muted">Si subes un archivo o pegas una URL, esta reemplaza la imagen predeterminada del producto.</small>
-                                </div>
-
-                                <!-- Select de categoría -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <select id="categoria-select" class="form-select form-control">
-                                        <option value="" selected>Seleccionar categoría</option>
-                                        <option value="Comidas">Comidas</option>
-                                        <option value="Bebidas">Bebidas</option>
-                                        <option value="Postres">Postres</option>
-                                    </select>
-                                    <label class="form-label" for="categoria-select">Categoría</label>
-                                </div>
-                              
-                                <!-- Input de precio -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                  <input type="number" id="precio-pro" class="form-control" />
-                                  <label class="form-label" for="precio-pro">Precio</label>
-                                </div>
-    
-                                <!-- Input de stock -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                  <input type="number" id="form6Example6" class="form-control" />
-                                  <label class="form-label" for="form6Example6">Stock</label>
-                                </div>
-                              
-                                <!-- Input de descripción -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                  <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-                                  <label class="form-label" for="form6Example7">Descripcion</label>
-                                </div>
-                            
-                              
-                                <!-- Botón de enviar -->
-                                <button data-mdb-ripple-init type="button" id="btn-crear-producto" class="btn btn-primary btn-block mb-4">Crear Producto</button>
-                            </form>
                         </div>
-                        <div class="col-5">
-                            <img id="imagen-pro" src="https://m.media-amazon.com/images/I/61XV8PihCwL._SY250_.jpg" class="img-fluid img-preview-producto" alt="">
+
+                        <!-- Columna Imagen y Vista Previa -->
+                        <div class="col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-image mr-1"></i> Imagen del Producto</h6>
+                                </div>
+                                <div class="card-body text-center">
+                                    <!-- Vista previa -->
+                                    <div class="mb-3">
+                                        <img id="imagen-pro" src="https://m.media-amazon.com/images/I/61XV8PihCwL._SY250_.jpg" class="img-fluid img-preview-producto border" alt="Vista previa">
+                                        <div class="small text-muted mt-2">Vista previa de la imagen</div>
+                                    </div>
+
+                                    <hr>
+
+                                    <!-- Opciones de carga de imagen -->
+                                    <div class="text-left mb-3">
+                                        <label class="small font-weight-bold text-gray-700 mb-1">
+                                            <i class="fas fa-folder-open text-primary mr-1"></i> Opción 1: Subir desde tu computador:
+                                        </label>
+                                        <input type="file" id="imagen-file" accept="image/*" class="form-control-file small">
+                                    </div>
+
+                                    <div class="text-left mb-2">
+                                        <label class="small font-weight-bold text-gray-700 mb-1">
+                                            <i class="fas fa-link text-info mr-1"></i> Opción 2: O pegar enlace URL:
+                                        </label>
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" id="imagen-url" class="form-control" placeholder="https://ejemplo.com/comida.jpg">
+                                            <div class="input-group-append">
+                                                <button type="button" id="btn-cargar-url" class="btn btn-primary">Cargar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                      
                     </div>
 
                 </div>
@@ -439,7 +341,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Pocheches Fast Food 2026 &bull; Creado por Sebastian, Bryan y Yadir. Proyecto educativo del Cesde</span>
                     </div>
                 </div>
             </footer>
@@ -462,15 +364,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-out-alt text-danger mr-2"></i>¿Cerrar Sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si estás listo para salir del sistema.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-sm" href="login.html">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
@@ -486,174 +388,8 @@
     <!-- Scripts personalizados para todas las páginas -->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Plugins a nivel de página -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Scripts personalizados a nivel de página -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-
-    <script>
-        // Lista de productos con su imagen y precio predeterminado
-        let imagenes = [
-            { name: "Hamburguesa", precio: 30000, url: "https://th.bing.com/th/id/R.c691ed37c9ce3040c3ebd2892e88870c?rik=QUBcFflN%2b9oqPQ&pid=ImgRaw&r=0" },
-            { name: "Pizza", precio: 45000, url: "https://www.ocu.org/-/media/ocu/images/home/alimentacion/alimentos/pizzas_selector_1600x900.jpg?rev=6a81e278-07fc-4e95-9ba1-361063f35adf&hash=B8B1264AB6FC3F4B1AE140EB390208CD" },
-            { name: "Pasta", precio: 25000, url: "https://cdn.shopify.com/s/files/1/2538/5286/products/Spaghetti-with-Meat-Sauce-Recipe-1-1200_787x787.jpg?v=1588772697" },
-            { name: "Perro", precio: 22000, url: "https://th.bing.com/th/id/OIP.2QjcuwsTimAImo8WSQdTdAHaFp?rs=1&pid=ImgDetMain" },
-            { name: "Burrito", precio: 25000, url: "https://th.bing.com/th/id/R.1a7d6f0af7be590eb4e27d96ce3530e5?rik=eiCcb%2f%2b9TYNzXQ&pid=ImgRaw&r=0" },
-            { name: "Tacos", precio: 26000, url: "https://th.bing.com/th/id/R.d50b293e5d2de51d349691db78f71f8c?rik=FfttXcgxjuqR%2fQ&pid=ImgRaw&r=0" },
-            { name: "Pollo", precio: 35000, url: "https://th.bing.com/th/id/OIP.IAza-1yPPvzA55qlI0VqvQHaF7?w=744&h=595&rs=1&pid=ImgDetMain" },
-            { name: "Chuzo", precio: 22000, url: "https://th.bing.com/th/id/R.c0d3de5bd13edcc5323d074e4ba8f864?rik=lFbTsZF0ESAN5w&pid=ImgRaw&r=0" },
-            { name: "Sanchipapa", precio: 20000, url: "https://1.bp.blogspot.com/-6lKIIVq3CXw/WK8raCAD-gI/AAAAAAABMnI/5VoCplTPogASfSZS5XzIFZizMBZ8yO8bQCLcB/s1600/salchipapa%2Bcolombiana.png" },
-            { name: "Picada", precio: 65000, url: "https://cdn.colombia.com/gastronomia/2016/06/21/picada-colombiana-2990.jpg" }
-        ];
-
-        // Referencias a los elementos del formulario
-        let selectImagen = document.querySelector('#productos-select');
-        let selectCategoria = document.querySelector('#categoria-select');
-        let imagenMostrada = document.querySelector('#imagen-pro');
-        let precioInput = document.querySelector("#precio-pro");
-        let btnCrear = document.querySelector('#btn-crear-producto');
-        let stockInput = document.querySelector('#form6Example6');
-        let descripcionInput = document.querySelector('#form6Example7');
-        let tituloForm = document.querySelector('#titulo-form');
-        // Referencias a los nuevos controles de imagen
-        let inputArchivo = document.querySelector('#imagen-file');
-        let inputUrl = document.querySelector('#imagen-url');
-        let btnCargarUrl = document.querySelector('#btn-cargar-url');
-
-        // Opción 1: cuando el usuario selecciona un archivo de su dispositivo
-        inputArchivo.addEventListener('change', () => {
-            const archivo = inputArchivo.files[0];
-            if (!archivo) return;
-
-            // Convertimos el archivo a base64 para poder mostrarlo y guardarlo
-            const lector = new FileReader();
-            lector.onload = () => {
-                imagenMostrada.src = lector.result;
-            };
-            lector.readAsDataURL(archivo);
-
-            // Si había una URL escrita, la limpiamos para evitar confusión
-            inputUrl.value = "";
-        });
-
-        // Opción 2: cuando el usuario pega una URL y presiona "Cargar"
-        btnCargarUrl.addEventListener('click', () => {
-            const url = inputUrl.value.trim();
-            if (!url) {
-                alert("Pega una URL de imagen válida");
-                return;
-            }
-            imagenMostrada.src = url;
-
-            // Si había un archivo seleccionado, lo limpiamos
-            inputArchivo.value = "";
-        });
-
-
-        // Detectar si estamos en modo edición (viene un id en la URL)
-        const params = new URLSearchParams(window.location.search);
-        const idEditar = params.get('id');
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            if (idEditar) {
-                // Estamos editando: cambiamos textos y precargamos los datos
-                btnCrear.textContent = "Actualizar Producto";
-                tituloForm.textContent = "Editar Producto";
-
-                try {
-                    let respuesta = await fetch(`http://localhost:3000/api/productos/${idEditar}`);
-                    if (!respuesta.ok) {
-                        alert("No se pudo cargar el producto");
-                        return;
-                    }
-                    let producto = await respuesta.json();
-
-                    // Si el backend devuelve un array, tomamos el primer elemento
-                    if (Array.isArray(producto)) producto = producto[0];
-
-                    // Rellenamos el formulario con los datos del producto
-                    selectImagen.value = producto.nombre;
-                    selectCategoria.value = producto.categoria || "";
-                    precioInput.value = producto.precio;
-                    stockInput.value = producto.stock;
-                    descripcionInput.value = producto.descripcion;
-                    imagenMostrada.src = producto.imagen;
-
-                } catch (error) {
-                    alert("Error de conexión al cargar el producto");
-                    console.error(error);
-                }
-            }
-        });
-
-        // Si el nombre escrito coincide con uno predeterminado, autocompletamos imagen y precio
-        // Si es un nombre nuevo, dejamos que el usuario ponga su propia imagen/precio manualmente
-        selectImagen.addEventListener('input', () => {
-            const imagenSeleccionada = imagenes.find(imagen => imagen.name.toLowerCase() === selectImagen.value.toLowerCase());
-            if (imagenSeleccionada) {
-                imagenMostrada.src = imagenSeleccionada.url;
-                imagenMostrada.alt = imagenSeleccionada.name;
-                precioInput.value = imagenSeleccionada.precio;
-            }
-        });
-
-        // Evento del botón: crea o actualiza el producto según corresponda
-        btnCrear.addEventListener('click', async () => {
-            const nombre = selectImagen.value;
-            const categoria = selectCategoria.value;
-            const precio = precioInput.value;
-            const stock = stockInput.value;
-            const descripcion = descripcionInput.value;
-            const imagen = imagenMostrada.src;
-
-            // Validación de campos obligatorios
-            if  (!nombre.trim() || !categoria || !precio || !stock || !descripcion) {
-                alert("Por favor completa todos los campos, incluyendo la categoría");
-                return;
-            }
-
-            try {
-                let url = "http://localhost:3000/api/productos";
-                let metodo = "POST";
-
-                // Si hay un id en la URL, cambiamos a modo edición (PUT)
-                if (idEditar) {
-                    url = `http://localhost:3000/api/productos/${idEditar}`;
-                    metodo = "PUT";
-                }
-
-                let respuesta = await fetch(url, {
-                    method: metodo,
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        nombre: nombre,
-                        categoria: categoria,
-                        descripcion: descripcion,
-                        precio: precio,
-                        stock: stock,
-                        imagen: imagen
-                    })
-                });
-
-                if (!respuesta.ok) {
-                    alert(idEditar ? "Error al actualizar el producto" : "Error al crear el producto");
-                    return;
-                }
-
-                alert(idEditar ? "Producto actualizado con éxito" : "Producto creado con éxito");
-                window.location.href = "listado-pro.html";
-
-            } catch (error) {
-                alert("Error de conexión con el servidor");
-                console.error(error);
-            }
-        });
-
-    </script>
+    <script src="js/crearProducto.js"></script>
+        
 
 </body>
 

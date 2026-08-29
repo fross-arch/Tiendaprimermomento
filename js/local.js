@@ -2,22 +2,22 @@
 
 // 1. Inyección INMEDIATA de estilos antes de que la página se pinte (Elimina parpadeos al refrescar)
 (function aplicarEstilosAnticipados() {
-    const userStr = localStorage.getItem('userLogin');
+    const userStr = localStorage.getItem('userLogin') || localStorage.getItem('usuario');
     if (!userStr) return;
 
     try {
         const user = JSON.parse(userStr);
-        const rol = (user.rol || '').toLowerCase();
+        const rol = (user.rol || localStorage.getItem('userRole') || '').toLowerCase();
         
         let css = '#imagenPerfil { opacity: 0; transition: opacity 0.15s ease; } ';
 
         if (rol !== 'administrador') {
-            css += '#nav-usuarios, #collapseUsuarios, #card-usuarios, a[data-target="#collapseUsuarios"] { display: none !important; } ';
-            css += 'li:has(#collapseUsuarios), li:has(a[data-target="#collapseUsuarios"]) { display: none !important; } ';
+            css += '#nav-usuarios, #collapseUsuarios, #card-usuarios, a[data-target="#collapseUsuarios"], a[href="listado-usuarios.html"], a[href="crear-usuario.html"] { display: none !important; } ';
+            css += 'li:has(#collapseUsuarios), li:has(a[data-target="#collapseUsuarios"]), li:has(a[href="reportes.html"]) { display: none !important; } ';
         }
 
         if (rol === 'vendedor' || rol === 'cajero' || rol === 'cliente') {
-            css += 'a[href="crear-pro.html"] { display: none !important; } ';
+            css += 'a[href="crear-pro.html"], #link-crear-sidebar { display: none !important; } ';
         }
 
         if (rol === 'cajero' || rol === 'cliente') {
@@ -25,8 +25,9 @@
         }
 
         if (rol === 'cliente') {
-            css += '#nav-clientes, #collapseClientes, #card-clientes, a[data-target="#collapseClientes"] { display: none !important; } ';
-            css += 'li:has(#collapseClientes), li:has(a[data-target="#collapseClientes"]) { display: none !important; } ';
+            css += '#nav-clientes, #collapseClientes, #card-clientes, a[data-target="#collapseClientes"], a[href="listado-clientes.html"], a[href="crear-cliente.html"], a[href="reportes.html"] { display: none !important; } ';
+            css += 'li:has(#collapseClientes), li:has(a[data-target="#collapseClientes"]), li:has(a[href="reportes.html"]) { display: none !important; } ';
+            css += '.btn-editar, .btn-eliminar { display: none !important; } ';
         }
 
         const style = document.createElement('style');
@@ -46,15 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function verificarSesionYPermisos() {
-    const user = JSON.parse(localStorage.getItem('userLogin'));
-
+    const userStr = localStorage.getItem('userLogin') || localStorage.getItem('usuario');
+    
     // Si no ha iniciado sesión, redirigir al login
-    if (!user) {
-        window.location.href = "login.html";
+    if (!userStr) {
+        const paginaActual = window.location.pathname.split('/').pop().toLowerCase();
+        if (paginaActual !== 'login.html' && paginaActual !== 'register.html') {
+            window.location.href = "login.html";
+        }
         return;
     }
 
-    const rol = (user.rol || '').toLowerCase();
+    const user = JSON.parse(userStr);
+    const rol = (user.rol || localStorage.getItem('userRole') || '').toLowerCase();
+
+    // Sincronizar localStorage
+    localStorage.setItem('userLogin', JSON.stringify(user));
+    localStorage.setItem('usuario', JSON.stringify(user));
+    localStorage.setItem('userRole', rol);
 
     // Pintar nombre de usuario y rol juntos
     const nombreUsuario = document.querySelector('#nombreusuario');
@@ -103,7 +113,8 @@ function verificarSesionYPermisos() {
             'listado-usuarios.html',
             'crear-pro.html',
             'crear-cliente.html',
-            'listado-clientes.html'
+            'listado-clientes.html',
+            'reportes.html'
         ]
     };
 
@@ -119,7 +130,7 @@ function verificarSesionYPermisos() {
 
 function aplicarPermisosVisuales(rol) {
     if (rol !== 'administrador') {
-        const menuUsuarios = document.querySelector('#collapseUsuarios')?.closest('.nav-item');
+        const menuUsuarios = document.querySelector('#collapseUsuarios')?.closest('.nav-item') || document.querySelector('a[href="listado-usuarios.html"]')?.closest('.nav-item');
         if (menuUsuarios) menuUsuarios.style.display = 'none';
 
         const cardUsuarios = document.getElementById('card-usuarios') || document.querySelector('a[href="listado-usuarios.html"]')?.closest('.col-xl-3, .col-md-6');
@@ -137,7 +148,10 @@ function aplicarPermisosVisuales(rol) {
     }
 
     if (rol === 'cliente') {
-        const menuClientes = document.querySelector('#collapseClientes')?.closest('.nav-item');
+        const linkReportes = document.querySelector('a[href="reportes.html"]')?.closest('.nav-item');
+        if (linkReportes) linkReportes.style.display = 'none';
+
+        const menuClientes = document.querySelector('#collapseClientes')?.closest('.nav-item') || document.querySelector('a[href="listado-clientes.html"]')?.closest('.nav-item');
         if (menuClientes) menuClientes.style.display = 'none';
 
         const cardClientes = document.getElementById('card-clientes') || document.querySelector('a[href="listado-clientes.html"]')?.closest('.col-xl-3, .col-md-6');
@@ -152,6 +166,8 @@ function configurarLogout() {
         btn.addEventListener('click', () => {
             if (btn.getAttribute('data-toggle') !== 'modal') {
                 localStorage.removeItem('userLogin');
+                localStorage.removeItem('usuario');
+                localStorage.removeItem('userRole');
                 window.location.href = "login.html";
             }
         });
@@ -181,125 +197,93 @@ function configurarBusquedaProductos() {
     }
 
     searchForms.forEach(form => {
-        form.style.position = 'relative';
-        const input = form.querySelector('input[type="text"]');
+        const input = form.querySelector('input[type="text"], input[type="search"]');
+        const boton = form.querySelector('button');
         if (!input) return;
 
-        input.placeholder = "Buscar productos...";
-        input.setAttribute('autocomplete', 'off');
-
-        // Crear contenedor de resultados si no existe
-        let dropdown = form.querySelector('.search-results-box');
-        if (!dropdown) {
-            dropdown = document.createElement('div');
-            dropdown.className = 'search-results-box dropdown-menu shadow-lg p-0';
-            dropdown.style.cssText = 'position: absolute; top: 100%; left: 0; width: 100%; min-width: 320px; max-height: 380px; overflow-y: auto; display: none; z-index: 1050; margin-top: 5px;';
-            form.appendChild(dropdown);
+        let contenedorResultados = form.querySelector('.resultados-busqueda-flotante');
+        if (!contenedorResultados) {
+            contenedorResultados = document.createElement('div');
+            contenedorResultados.className = 'resultados-busqueda-flotante shadow bg-white rounded border position-absolute w-100';
+            contenedorResultados.style.cssText = 'top: 100%; left: 0; z-index: 1050; max-height: 380px; overflow-y: auto; display: none; margin-top: 5px;';
+            form.style.position = 'relative';
+            form.appendChild(contenedorResultados);
         }
 
-        async function buscar(texto) {
-            const query = texto.trim().toLowerCase();
+        async function buscarEnVivo() {
+            const query = input.value.trim().toLowerCase();
             if (query.length === 0) {
-                dropdown.style.display = 'none';
-                if (typeof window.filtrarTablaProductosEnVivo === 'function') {
-                    window.filtrarTablaProductosEnVivo('');
-                }
+                contenedorResultados.style.display = 'none';
+                contenedorResultados.innerHTML = '';
                 return;
             }
 
             const productos = await obtenerProductos();
-            const filtrados = productos.filter(p => 
-                (p.nombre && p.nombre.toLowerCase().includes(query)) || 
-                (p.descripcion && p.descripcion.toLowerCase().includes(query))
+            const coincidencias = productos.filter(p => 
+                (p.nombre && p.nombre.toLowerCase().includes(query)) ||
+                (p.descripcion && p.descripcion.toLowerCase().includes(query)) ||
+                (p.categoria && p.categoria.toLowerCase().includes(query))
             );
 
-            // Si estamos en listado-pro.html, filtrar también la tabla en vivo
-            if (typeof window.filtrarTablaProductosEnVivo === 'function') {
-                window.filtrarTablaProductosEnVivo(query);
-            }
-
-            dropdown.innerHTML = '';
-
-            if (filtrados.length === 0) {
-                dropdown.innerHTML = `
+            if (coincidencias.length === 0) {
+                contenedorResultados.innerHTML = `
                     <div class="p-3 text-center text-muted small">
-                        <i class="fas fa-search-minus mr-1"></i> No se encontraron productos para "<strong>${texto}</strong>"
+                        <i class="fas fa-search mb-1 d-block text-gray-400"></i>
+                        No se encontraron productos para "<strong>${input.value}</strong>"
                     </div>
                 `;
-                dropdown.style.display = 'block';
+                contenedorResultados.style.display = 'block';
                 return;
             }
 
-            const header = document.createElement('div');
-            header.className = 'dropdown-header bg-light py-2 text-primary font-weight-bold';
-            header.innerHTML = `<i class="fas fa-boxes mr-1"></i> ${filtrados.length} Producto(s) encontrado(s):`;
-            dropdown.appendChild(header);
+            let html = '<div class="list-group list-group-flush">';
+            coincidencias.forEach(p => {
+                const foto = p.imagen || 'https://m.media-amazon.com/images/I/61XV8PihCwL._SY250_.jpg';
+                const precioFmt = Number(p.precio).toLocaleString('es-CO');
+                const cat = p.categoria || 'Comidas';
 
-            filtrados.forEach(prod => {
-                const item = document.createElement('a');
-                item.className = 'dropdown-item d-flex align-items-center py-2 border-bottom';
-                item.href = 'listado-pro.html?buscar=' + encodeURIComponent(prod.nombre);
-                item.style.whiteSpace = 'normal';
-
-                const foto = prod.imagen || 'img/undraw_profile.svg';
-                const precioFormatted = Number(prod.precio || 0).toLocaleString('es-CO');
-
-                item.innerHTML = `
-                    <img src="${foto}" width="42" height="42" class="rounded mr-2 shadow-sm" style="object-fit: cover;" onerror="this.src='img/undraw_profile.svg'">
-                    <div class="flex-grow-1">
-                        <div class="font-weight-bold text-gray-800">${prod.nombre}</div>
-                        <div class="small text-success font-weight-bold">$${precioFormatted} <span class="badge badge-light border text-muted ml-1">Stock: ${prod.stock}</span></div>
-                    </div>
-                    <i class="fas fa-arrow-right text-gray-400 small ml-2"></i>
+                html += `
+                    <a href="listado-pro.html?buscar=${encodeURIComponent(p.nombre)}" class="list-group-item list-group-item-action p-2 d-flex align-items-center">
+                        <img src="${foto}" class="rounded mr-2" style="width: 40px; height: 40px; object-fit: cover;" onerror="this.src='https://m.media-amazon.com/images/I/61XV8PihCwL._SY250_.jpg'">
+                        <div class="flex-grow-1" style="line-height: 1.2;">
+                            <div class="font-weight-bold text-primary small">${p.nombre}</div>
+                            <small class="text-muted">${cat} • <strong class="text-success">$${precioFmt}</strong></small>
+                        </div>
+                        <span class="badge badge-light border text-muted">Stock: ${p.stock}</span>
+                    </a>
                 `;
-                dropdown.appendChild(item);
             });
+            html += '</div>';
 
-            dropdown.style.display = 'block';
+            contenedorResultados.innerHTML = html;
+            contenedorResultados.style.display = 'block';
         }
 
-        input.addEventListener('input', (e) => {
+        input.addEventListener('input', () => {
             clearTimeout(timeoutBusqueda);
-            timeoutBusqueda = setTimeout(() => {
-                buscar(e.target.value);
-            }, 100);
+            timeoutBusqueda = setTimeout(buscarEnVivo, 200);
         });
 
         input.addEventListener('focus', () => {
             if (input.value.trim().length > 0) {
-                buscar(input.value);
+                buscarEnVivo();
             }
         });
 
-        // Al enviar el formulario con enter o botón
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const val = input.value.trim();
-            if (val.length > 0) {
-                window.location.href = 'listado-pro.html?buscar=' + encodeURIComponent(val);
+        document.addEventListener('click', (e) => {
+            if (!form.contains(e.target)) {
+                contenedorResultados.style.display = 'none';
             }
         });
 
-        const btnSearch = form.querySelector('button');
-        if (btnSearch) {
-            btnSearch.addEventListener('click', (e) => {
+        if (boton) {
+            boton.addEventListener('click', (e) => {
                 e.preventDefault();
-                const val = input.value.trim();
-                if (val.length > 0) {
-                    window.location.href = 'listado-pro.html?buscar=' + encodeURIComponent(val);
+                const q = input.value.trim();
+                if (q.length > 0) {
+                    window.location.href = `listado-pro.html?buscar=${encodeURIComponent(q)}`;
                 }
             });
         }
     });
-
-    // Cerrar los dropdowns al hacer clic afuera
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.navbar-search')) {
-            document.querySelectorAll('.search-results-box').forEach(box => {
-                box.style.display = 'none';
-            });
-        }
-    });
 }
-
-

@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pocheches Fast Food - Crear Usuario</title>
+    <title>Pocheches Fast Food - Reportes de Ventas</title>
+    
     <!--Favicon-->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
-
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,6 +18,23 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/panel.css" rel="stylesheet"> 
     <script src="js/local.js"></script>
+
+    <style>
+        @media print {
+            #accordionSidebar, .navbar, .btn-print-report, footer, .scroll-to-top {
+                display: none !important;
+            }
+            #content-wrapper {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #fff !important;
+            }
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -44,16 +61,7 @@
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de Control</span></a>
-            
-            <!-- Nav Item - Reportes -->
-            <li class="nav-item">
-                <a class="nav-link" href="reportes.html">
-                    <i class="fas fa-fw fa-chart-bar"></i>
-                    <span>Reportes y Ventas</span>
-                </a>
             </li>
-
-</li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -112,19 +120,27 @@
             </li>
 
             <!-- Nav Item - Usuarios -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
-                    aria-expanded="true" aria-controls="collapseUsuarios">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
+                    aria-expanded="false" aria-controls="collapseUsuarios">
                     <i class="fas fa-fw fa-user-tie"></i>
                     <span>Usuarios</span>
                 </a>
-                <div id="collapseUsuarios" class="collapse show" aria-labelledby="headingUsuarios" data-parent="#accordionSidebar">
+                <div id="collapseUsuarios" class="collapse" aria-labelledby="headingUsuarios" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="listado-usuarios.html">Ver Usuarios</a>
-                        <a class="collapse-item active font-weight-bold text-primary" href="crear-usuario.html">Crear Usuarios</a>
+                        <a class="collapse-item" href="crear-usuario.html">Crear Usuarios</a>
                     </div>
                 </div>
+            </li>
+
+            <!-- Nav Item - Reportes (Activo) -->
+            <li class="nav-item active">
+                <a class="nav-link" href="reportes.html">
+                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <span>Reportes y Ventas</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -204,115 +220,167 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-user-plus text-primary mr-2"></i>Crear Nuevo Usuario (Roles)</h1>
-                        <a href="listado-usuarios.html" class="btn btn-sm btn-secondary shadow-sm">
-                            <i class="fas fa-list fa-sm mr-1"></i> Ver Usuarios
-                        </a>
+                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-chart-line text-primary mr-2"></i>Reportes de Ventas y Estadísticas</h1>
+                        <button onclick="window.print()" class="btn-print-report d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-print fa-sm text-white-50 mr-1"></i> Imprimir Reporte General
+                        </button>
                     </div>
 
-                    <!-- Content Row -->
+                    <!-- 4 Tarjetas de Métricas -->
                     <div class="row">
+                        <!-- Ventas Totales -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Facturación Total Neta</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="rep-total-ventas">$0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- Formulario de Crear Usuario -->
-                        <div class="col-lg-7">
+                        <!-- Total Pedidos -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Pedidos Realizados</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="rep-total-pedidos">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Clientes Registrados -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Clientes Registrados</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="rep-total-clientes">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Productos en Carta -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Productos en Inventario</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="rep-total-productos">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-hamburger fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fila de Diagramas de Barras y Circular -->
+                    <div class="row">
+                        <!-- Gráfica de Barras: Top Productos Más Vendidos -->
+                        <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Datos del Usuario</h6>
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <i class="fas fa-chart-bar mr-1"></i> Top Productos Más Vendidos (Unidades)
+                                    </h6>
                                 </div>
                                 <div class="card-body">
-                                    <form id="formulario-usuario">
-                                   
-                                        <!-- Rol select -->
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold" for="rol">Rol del Usuario:</label>
-                                            <select id="rol" class="form-control" required>
-                                                <option value="" selected disabled>Seleccionar Rol...</option>
-                                                <option value="administrador">Administrador</option>
-                                                <option value="vendedor">Vendedor</option>
-                                                <option value="cajero">Cajero</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Usuario input -->
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold" for="usuario">Nombre de Usuario (Login):</label>
-                                            <input type="text" id="usuario" class="form-control" placeholder="Ej: juancarlos" required />
-                                        </div>
-            
-                                        <!-- Contraseña input -->
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold" for="contrasena">Contraseña:</label>
-                                            <input type="password" id="contrasena" class="form-control" placeholder="********" required />
-                                        </div>
-
-                                        <!-- Confirmar contraseña input -->
-                                        <div class="form-group mb-4">
-                                            <label class="font-weight-bold" for="confirmar_contrasena">Confirmar Contraseña:</label>
-                                            <input type="password" id="confirmar_contrasena" class="form-control" placeholder="********" required />
-                                        </div>
-                                    
-                                        <!-- Submit button -->
-                                        <button type="submit" class="btn btn-primary btn-block">
-                                            <i class="fas fa-user-plus mr-1"></i> Guardar Usuario
-                                        </button>
-                                    </form>
+                                    <div class="chart-bar" style="position: relative; height: 320px;">
+                                        <canvas id="graficaProductos"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Selector de Imagen -->
-                        <div class="col-lg-5">
+                        <!-- Gráfica Circular: Estados de Pedidos -->
+                        <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Foto de Perfil</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <i class="fas fa-chart-pie mr-1"></i> Estado de Pedidos
+                                    </h6>
                                 </div>
-                                <div class="card-body text-center">
-                                    <!-- Vista previa -->
-                                    <div class="mb-3">
-                                        <img id="avatar-preview" src="img/undraw_profile.svg" class="img-profile rounded-circle img-thumbnail shadow-sm" style="width: 140px; height: 140px; object-fit: cover;">
-                                        <div class="small text-muted mt-2">Vista previa de la imagen</div>
+                                <div class="card-body">
+                                    <div class="chart-pie pt-2 pb-2" style="position: relative; height: 260px;">
+                                        <canvas id="graficaEstados"></canvas>
                                     </div>
+                                    <div class="mt-2 text-center small" id="leyenda-estados"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <hr>
-
-                                    <!-- Opción 1: Galería Visual de Avatares -->
-                                    <div class="form-group text-left mb-3">
-                                        <label class="small font-weight-bold"><i class="fas fa-palette mr-1 text-primary"></i> 1. Haz clic en el avatar que más te guste:</label>
-                                        <div class="d-flex flex-wrap justify-content-center p-2 mb-2 bg-light rounded border" id="galeria-avatares" style="gap: 10px; max-height: 150px; overflow-y: auto;">
-                                            <img src="img/pochechefastfood.jpg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Pocheches Fast Food Logo" data-src="img/pochechefastfood.jpg">
-                                            <img src="img/undraw_profile.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Azul Clásico" data-src="img/undraw_profile.svg">
-                                            <img src="img/imgzeus.png" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Zeus" data-src="img/imgzeus.png">
-                                            <img src="img/undraw_profile_1.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chica Ilustrada" data-src="img/undraw_profile_1.svg">
-                                            <img src="img/undraw_profile_2.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chico Ilustrado" data-src="img/undraw_profile_2.svg">
-                                            <img src="img/undraw_profile_3.svg" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Con Lentes" data-src="img/undraw_profile_3.svg">
-                                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Robot" data-src="https://api.dicebear.com/7.x/bottts/svg?seed=Zeus">
-                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Gamer" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix">
-                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Ejecutiva" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka">
-                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Chico Gorra" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Milo">
-                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Sonriente" data-src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zoe">
-                                            <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Pixel Art" data-src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Mario">
-                                            <img src="https://api.dicebear.com/7.x/personas/svg?seed=Alex" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Moderno" data-src="https://api.dicebear.com/7.x/personas/svg?seed=Alex">
-                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Chico" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150">
-                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Chica" data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150">
-                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" class="avatar-item rounded-circle border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; cursor: pointer;" title="Foto Ejecutivo" data-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150">
-                                        </div>
-                                    </div>
-
-                                    <!-- Opción 2: URL de internet -->
-                                    <div class="form-group text-left mb-3">
-                                        <label class="small font-weight-bold"><i class="fas fa-link mr-1"></i> 2. O pegar enlace URL:</label>
-                                        <input type="url" id="avatar-url" class="form-control form-control-sm" placeholder="https://ejemplo.com/foto.jpg">
-                                    </div>
-
-                                    <!-- Opción 3: Examinar archivo local -->
-                                    <div class="form-group text-left mb-2">
-                                        <label class="small font-weight-bold"><i class="fas fa-folder-open mr-1"></i> 3. O subir archivo desde tu PC:</label>
-                                        <input type="file" id="avatar-file" class="form-control-file small" accept="image/*">
+                    <!-- Fila de Diagrama de Barras Horizontal: Top Clientes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <i class="fas fa-trophy text-warning mr-1"></i> Ranking: Clientes que Más Han Comprado ($ COP)
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div style="position: relative; height: 280px;">
+                                        <canvas id="graficaClientes"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
+
+                    <!-- Tabla Detallada: Top Clientes VIP -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-medal mr-1"></i> Tabla de Clientes con Mayor Volumen de Compra</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover align-middle mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Posición</th>
+                                            <th>Cliente</th>
+                                            <th>Email</th>
+                                            <th>Teléfono</th>
+                                            <th class="text-center">N° Pedidos</th>
+                                            <th class="text-right">Total Gastado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabla-ranking-clientes">
+                                        <tr>
+                                            <td colspan="6" class="text-center py-3 text-muted">Procesando datos de clientes...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -365,17 +433,14 @@
     <!-- Bootstrap core JavaScript-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Lógica sencilla de Creación de Usuario -->
-    <script src="js/crearUsuario.js"></script>
-        
+    <!-- Chart.js para las gráficas de barras y circulares -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
+    <!-- Script de Reportes -->
+    <script src="js/reportes.js"></script>
 </body>
 
 </html>

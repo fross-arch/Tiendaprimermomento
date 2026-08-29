@@ -50,7 +50,16 @@
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de Control</span></a>
+            
+            <!-- Nav Item - Reportes -->
+            <li class="nav-item">
+                <a class="nav-link" href="reportes.html">
+                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <span>Reportes y Ventas</span>
+                </a>
             </li>
+
+</li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -272,7 +281,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Listado de Clientes</h1>
+                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-users text-primary mr-2"></i>Listado de Clientes</h1>
                         <a href="crear-cliente.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-plus fa-sm text-white-50"></i> Crear Cliente</a>
                     </div>
@@ -318,7 +327,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                        <span>Copyright &copy; Pocheches Fast Food 2026 &bull; Creado por Sebastian, Bryan y Yadir. Proyecto educativo del Cesde</span>
                     </div>
                 </div>
             </footer>
@@ -464,170 +473,7 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Script para listar, editar y eliminar clientes -->
-    <script>
-        const tablaClientes = document.getElementById('tabla-clientes');
-        let listaClientesCache = [];
-        let editImagenSeleccionada = '';
-
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarClientes();
-            configurarEventosImagenEdit();
-        });
-
-        // 1. Cargar lista de clientes
-        async function cargarClientes() {
-            try {
-                const respuesta = await fetch('http://localhost:3000/api/clientes');
-                const clientes = await respuesta.json();
-                listaClientesCache = clientes;
-
-                tablaClientes.innerHTML = '';
-
-                clientes.forEach((cli, index) => {
-                    const fila = document.createElement('tr');
-                    const foto = cli.imagen || 'img/undraw_profile_2.svg';
-                    fila.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>
-                            <img src="${foto}" width="40" height="40" class="rounded-circle img-thumbnail" style="object-fit: cover;" onerror="this.src='img/undraw_profile_2.svg'">
-                        </td>
-                        <td>${cli.nombre}</td>
-                        <td>${cli.apellido}</td>
-                        <td>${cli.email}</td>
-                        <td>${cli.celular}</td>
-                        <td>${cli.direccion}</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm mr-1" onclick="abrirModalEditar(${cli.id_cliente})" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cli.id_cliente})" title="Eliminar">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    `;
-                    tablaClientes.appendChild(fila);
-                });
-            } catch (error) {
-                console.error('Error al cargar clientes:', error);
-            }
-        }
-
-        // 2. Abrir Modal de Edición
-        function abrirModalEditar(id) {
-            const cliente = listaClientesCache.find(c => c.id_cliente == id);
-            if (!cliente) return;
-
-            document.getElementById('edit-cli-id').value = cliente.id_cliente;
-            document.getElementById('edit-cli-nombre').value = cliente.nombre;
-            document.getElementById('edit-cli-apellido').value = cliente.apellido;
-            document.getElementById('edit-cli-email').value = cliente.email;
-            document.getElementById('edit-cli-celular').value = cliente.celular;
-            document.getElementById('edit-cli-direccion').value = cliente.direccion;
-            document.getElementById('edit-cli-direccion2').value = cliente.direccion2 || '';
-            document.getElementById('edit-cli-descripcion').value = cliente.descripcion || '';
-
-            editImagenSeleccionada = cliente.imagen || 'img/undraw_profile_2.svg';
-            document.getElementById('edit-avatar-preview').src = editImagenSeleccionada;
-            document.getElementById('edit-avatar-url').value = '';
-            document.getElementById('edit-avatar-file').value = '';
-
-            $('#modalEditarCliente').modal('show');
-        }
-
-        // 3. Configurar eventos de imagen en el Modal
-        function configurarEventosImagenEdit() {
-            const preview = document.getElementById('edit-avatar-preview');
-            const inputUrl = document.getElementById('edit-avatar-url');
-            const inputFile = document.getElementById('edit-avatar-file');
-            const items = document.querySelectorAll('.modal-avatar-item');
-
-            items.forEach(item => {
-                item.addEventListener('click', () => {
-                    editImagenSeleccionada = item.getAttribute('data-src');
-                    preview.src = editImagenSeleccionada;
-                    inputUrl.value = '';
-                    inputFile.value = '';
-                });
-            });
-
-            inputUrl.addEventListener('input', () => {
-                if (inputUrl.value.trim() !== '') {
-                    editImagenSeleccionada = inputUrl.value.trim();
-                    preview.src = editImagenSeleccionada;
-                    inputFile.value = '';
-                }
-            });
-
-            inputFile.addEventListener('change', () => {
-                const archivo = inputFile.files[0];
-                if (archivo) {
-                    const lector = new FileReader();
-                    lector.onload = (e) => {
-                        editImagenSeleccionada = e.target.result;
-                        preview.src = editImagenSeleccionada;
-                        inputUrl.value = '';
-                    };
-                    lector.readAsDataURL(archivo);
-                }
-            });
-        }
-
-        // 4. Guardar edición (PUT)
-        document.getElementById('formulario-editar-cliente').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const id = document.getElementById('edit-cli-id').value;
-            const datosActualizados = {
-                nombre: document.getElementById('edit-cli-nombre').value.trim(),
-                apellido: document.getElementById('edit-cli-apellido').value.trim(),
-                email: document.getElementById('edit-cli-email').value.trim(),
-                celular: document.getElementById('edit-cli-celular').value.trim(),
-                direccion: document.getElementById('edit-cli-direccion').value.trim(),
-                direccion2: document.getElementById('edit-cli-direccion2').value.trim(),
-                descripcion: document.getElementById('edit-cli-descripcion').value.trim(),
-                imagen: editImagenSeleccionada
-            };
-
-            try {
-                const respuesta = await fetch(`http://localhost:3000/api/clientes/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(datosActualizados)
-                });
-
-                if (respuesta.ok) {
-                    alert('Cliente actualizado con éxito');
-                    $('#modalEditarCliente').modal('hide');
-                    cargarClientes();
-                } else {
-                    const error = await respuesta.json();
-                    alert('Error al actualizar: ' + (error.message || 'Intente nuevamente'));
-                }
-            } catch (err) {
-                console.error(err);
-                alert('Error al conectar con el servidor');
-            }
-        });
-
-        // 5. Eliminar cliente (DELETE)
-        async function eliminarCliente(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
-                try {
-                    const respuesta = await fetch(`http://localhost:3000/api/clientes/${id}`, {
-                        method: 'DELETE'
-                    });
-                    if (respuesta.ok) {
-                        alert('Cliente eliminado con éxito');
-                        cargarClientes();
-                    } else {
-                        alert('No se pudo eliminar el cliente');
-                    }
-                } catch (error) {
-                    alert('Error al eliminar cliente');
-                }
-            }
-        }
-    </script>
+    <script src="js/listadoClientes.js"></script>
 </body>
 
 </html>

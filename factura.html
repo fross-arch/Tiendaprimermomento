@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Factura de Venta - Pocheches Fast Food</title>
+    
+    <!--Favicon-->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .invoice-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 40px;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .invoice-header {
+            border-bottom: 2px solid #4e73df;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .invoice-title {
+            color: #2e59d9;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .info-box {
+            background-color: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .table-invoice thead th {
+            background-color: #4e73df;
+            color: #ffffff;
+            border: none;
+        }
+
+        .table-invoice td {
+            vertical-align: middle;
+        }
+
+        .total-box {
+            background-color: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .grand-total {
+            color: #1cc88a;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Estilos exclusivos para la impresión */
+        @media print {
+            body {
+                background: #fff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .invoice-card {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 10px !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+            .table-invoice thead th {
+                background-color: #4e73df !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .info-box, .total-box {
+                background-color: #f8f9fc !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-4">
+        
+        <!-- Botones de Acción (Se ocultan al imprimir) -->
+        <div class="d-flex justify-content-between align-items-center mb-3 no-print max-auto" style="max-width: 800px; margin: auto;">
+            <a href="listado-pedidos.html" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left mr-1"></i> Volver a Pedidos
+            </a>
+            <div>
+                <button onclick="window.print()" class="btn btn-primary font-weight-bold shadow-sm">
+                    <i class="fas fa-print mr-1"></i> Imprimir Factura
+                </button>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Factura -->
+        <div class="invoice-card" id="factura-contenido">
+            
+            <!-- Encabezado de la Factura -->
+            <div class="row invoice-header align-items-center">
+                <div class="col-sm-7">
+                    <h2 class="invoice-title mb-1"><i class="fas fa-hamburger text-warning mr-2"></i>Pocheches Fast Food</h2>
+                    <p class="text-muted small mb-0">Comidas Rápidas Gourmet • NIT: 900.123.456-7</p>
+                    <p class="text-muted small mb-0">Email: contacto@pochechesfastfood.com • Cel: 300 123 4567</p>
+                </div>
+                <div class="col-sm-5 text-sm-right mt-3 mt-sm-0">
+                    <h5 class="text-gray-800 font-weight-bold mb-1">FACTURA DE VENTA</h5>
+                    <div class="h4 font-weight-bold text-primary mb-1" id="factura-id">Cargando...</div>
+                    <div class="small text-muted" id="factura-fecha"></div>
+                </div>
+            </div>
+
+            <!-- Datos del Cliente y Orden -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-box h-100">
+                        <h6 class="font-weight-bold text-primary mb-2"><i class="fas fa-user mr-1"></i> Datos del Cliente</h6>
+                        <p class="small mb-1"><strong>Nombre:</strong> <span id="factura-cliente-nombre">-</span></p>
+                        <p class="small mb-1"><strong>Email:</strong> <span id="factura-cliente-email">-</span></p>
+                        <p class="small mb-1"><strong>Teléfono:</strong> <span id="factura-cliente-tel">-</span></p>
+                        <p class="small mb-0"><strong>Dirección:</strong> <span id="factura-cliente-dir">-</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box h-100">
+                        <h6 class="font-weight-bold text-primary mb-2"><i class="fas fa-receipt mr-1"></i> Detalles de la Orden</h6>
+                        <p class="small mb-1"><strong>Método de Pago:</strong> <span id="factura-metodo-pago">-</span></p>
+                        <p class="small mb-1"><strong>Estado:</strong> <span id="factura-estado" class="badge badge-info p-1">-</span></p>
+                        <p class="small mb-0"><strong>Modalidad:</strong> <span id="factura-modalidad-entrega">-</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Productos -->
+            <div class="table-responsive my-3">
+                <table class="table table-bordered table-invoice mb-0">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th class="text-right">Precio Unit.</th>
+                            <th class="text-center">Cant.</th>
+                            <th class="text-right">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="factura-items">
+                        <tr>
+                            <td colspan="4" class="text-center py-3 text-muted">Cargando ítems de la orden...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Totales -->
+            <div class="row justify-content-end mt-4">
+                <div class="col-md-6">
+                    <div class="total-box">
+                        <div class="d-flex justify-content-between small mb-2">
+                            <span class="text-gray-700">Subtotal Productos:</span>
+                            <strong id="factura-subtotal">$0</strong>
+                        </div>
+                        <div class="d-flex justify-content-between small mb-2 text-danger">
+                            <span>Descuento:</span>
+                            <span id="factura-descuento">-$0</span>
+                        </div>
+                        <div class="d-flex justify-content-between small mb-2 text-info">
+                            <span>Envío / Domicilio:</span>
+                            <span id="factura-envio">+$0</span>
+                        </div>
+                        <hr class="my-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="font-weight-bold text-gray-800">TOTAL A PAGAR:</span>
+                            <span class="grand-total" id="factura-total">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pie de Página de Factura -->
+            <div class="text-center mt-5 pt-3 border-top">
+                <p class="small text-muted font-italic mb-1">¡Gracias por disfrutar el auténtico sabor de <strong>Pocheches Fast Food</strong>!</p>
+                <p class="text-muted" style="font-size: 11px;">Este documento es un comprobante de venta digital válido para efectos de control interno.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script de Factura -->
+    <script src="js/factura.js"></script>
+</body>
+
+</html>

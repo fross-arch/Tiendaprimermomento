@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Admin - Crear Pedido</title>
+    <title>Pocheches Fast Food - Crear Pedido</title>
+    
     <!--Favicon-->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
 
-
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -93,8 +87,8 @@
             </li>
 
             <!-- Nav Item - Pedidos -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePedidos"
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePedidos"
                     aria-expanded="true" aria-controls="collapsePedidos">
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Pedidos</span>
@@ -103,7 +97,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="listado-pedidos.html">Ver Pedidos</a>
-                        <a class="collapse-item active" href="crear-pedido.html">Crear Pedidos</a>
+                        <a class="collapse-item active font-weight-bold text-primary" href="crear-pedido.html">Crear Pedidos</a>
                     </div>
                 </div>
             </li>
@@ -122,6 +116,14 @@
                         <a class="collapse-item" href="crear-usuario.html">Crear Usuarios</a>
                     </div>
                 </div>
+            </li>
+
+            <!-- Nav Item - Reportes -->
+            <li class="nav-item">
+                <a class="nav-link" href="reportes.html">
+                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <span>Reportes y Ventas</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -151,12 +153,12 @@
 
                     <!-- Topbar Search -->
                     <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search position-relative" id="topbar-search-form" onsubmit="return false;">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar productos..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" id="topbar-search-input" placeholder="Buscar productos..."
+                                aria-label="Buscar" aria-describedby="basic-addon2" autocomplete="off">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button" id="topbar-search-btn">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -165,32 +167,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -227,81 +203,191 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Crear Pedido</h1>
-                        <a href="listado-pedidos.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-list fa-sm text-white-50"></i> Listado </a>
+                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-cart-plus text-primary mr-2"></i>Crear Nuevo Pedido</h1>
+                        <a href="listado-pedidos.html" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+                            <i class="fas fa-list fa-sm mr-1"></i> Ver Pedidos
+                        </a>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-                        <div class="col-8">
-                            <form id="formulario-pedido">
-                          
-                                <!-- Cliente select -->
-                                <div class="form-outline mb-4">
-                                    <select id="id_cliente" class="form-control" required>
-                                        <option selected>Seleccionar Cliente</option>
-                                        <!-- Los estudiantes deben llenar esto con GET /api/clientes -->
-                                    </select>
-                                    <label class="form-label" for="id_cliente">Cliente</label>
+                    <form id="formulario-pedido">
+                        <div class="row">
+                            <!-- Columna Izquierda: Cliente, Selector de Productos y Carrito -->
+                            <div class="col-lg-8">
+                                
+                                <!-- Card: Datos del Cliente y Pago -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user-check mr-1"></i> 1. Cliente y Forma de Pago</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="aviso-cliente-logueado" class="alert alert-info py-2 small mb-3" style="display: none;"></div>
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <label class="font-weight-bold" for="id_cliente">Cliente:</label>
+                                                <select id="id_cliente" class="form-control" required>
+                                                    <option selected disabled>Cargando clientes...</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label class="font-weight-bold" for="metodo_pago">Método de Pago:</label>
+                                                <select id="metodo_pago" class="form-control" required>
+                                                    <option value="" disabled selected>Seleccionar Método de Pago...</option>
+                                                    <option value="Efectivo">💵 Efectivo</option>
+                                                    <option value="Nequi">📱 Nequi</option>
+                                                    <option value="Daviplata">📱 Daviplata</option>
+                                                    <option value="PSE">💳 PSE</option>
+                                                    <option value="Tarjeta de Crédito">💳 Tarjeta de Crédito / Débito</option>
+                                                    <option value="Transferencia">🏦 Transferencia Bancaria</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <!-- Método de pago select -->
-                                <div class="form-outline mb-4">
-                                    <select id="metodo_pago" class="form-control" required>
-                                        <option selected>Seleccionar Método de Pago</option>
-                                        <option value="Efectivo">Efectivo</option>
-                                        <option value="PSE">PSE</option>
-                                        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-                                        <option value="Transferencia">Transferencia</option>
-                                        <option value="Nequi">Nequi</option>
-                                    </select>
-                                    <label class="form-label" for="metodo_pago">Método de Pago</label>
+                                <!-- Card: Selector de Productos -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-utensils mr-1"></i> 2. Agregar Productos al Pedido</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6 form-group mb-md-0">
+                                                <label class="small font-weight-bold text-gray-700">Producto:</label>
+                                                <select id="select-producto-agregar" class="form-control">
+                                                    <option value="" disabled selected>Cargando productos...</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 form-group mb-md-0">
+                                                <label class="small font-weight-bold text-gray-700">Cantidad:</label>
+                                                <input type="number" id="cantidad-agregar" class="form-control" value="1" min="1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="small d-none d-md-block">&nbsp;</label>
+                                                <button type="button" id="btn-agregar-carrito" class="btn btn-primary btn-block">
+                                                    <i class="fas fa-plus mr-1"></i> Agregar
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Vista previa del producto elegido -->
+                                        <div class="d-flex align-items-center mt-3 p-2 bg-light rounded border">
+                                            <img id="preview-producto-agregar" src="https://m.media-amazon.com/images/I/61XV8PihCwL._SY250_.jpg" class="rounded mr-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                            <div>
+                                                <div class="small font-weight-bold text-gray-800" id="preview-precio-agregar">Selecciona un producto</div>
+                                                <div class="small text-muted" id="preview-stock-agregar">Verifica el stock disponible</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <!-- Productos carrito -->
-                                <div class="form-outline mb-4">
-                                    <h5>Productos del Pedido</h5>
-                                    <table class="table" id="tabla-carrito">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Producto</th>
-                                                <th>Precio</th>
-                                                <th>Cantidad</th>
-                                                <th>Subtotal</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Los estudiantes agregan productos aquí dinámicamente -->
-                                        </tbody>
-                                    </table>
+                                <!-- Card: Detalle del Carrito -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-shopping-cart mr-1"></i> 3. Productos en el Carrito</h6>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover align-middle mb-0" id="tabla-carrito">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Producto</th>
+                                                        <th>Precio Unit.</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Subtotal</th>
+                                                        <th class="text-center">Quitar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="5" class="text-center text-muted py-3">
+                                                            <i class="fas fa-shopping-basket fa-2x mb-2 d-block text-gray-400"></i>
+                                                            No hay productos agregados al pedido todavía.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <!-- Descuento input -->
-                                <div class="form-outline mb-4">
-                                    <input type="number" id="descuento" class="form-control" value="0" min="0" />
-                                    <label class="form-label" for="descuento">Descuento ($)</label>
-                                </div>
+                            </div>
 
-                                <!-- Aumento input -->
-                                <div class="form-outline mb-4">
-                                    <input type="number" id="aumento" class="form-control" value="0" min="0" />
-                                    <label class="form-label" for="aumento">Aumento/Envío ($)</label>
-                                </div>
+                            <!-- Columna Derecha: Resumen Financiero, Descuentos y Domicilio -->
+                            <div class="col-lg-4">
+                                <div class="card shadow mb-4 sticky-top" style="top: 20px; z-index: 10;">
+                                    <div class="card-header py-3 bg-primary text-white">
+                                        <h6 class="m-0 font-weight-bold"><i class="fas fa-receipt mr-1"></i> Resumen de la Orden</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        
+                                        <!-- Subtotal de productos -->
+                                        <div class="d-flex justify-content-between mb-3 pb-2 border-bottom">
+                                            <span class="text-gray-700 font-weight-bold">Subtotal Productos:</span>
+                                            <strong class="text-gray-900" id="subtotal-pedido">$0</strong>
+                                        </div>
 
-                                <!-- Total display -->
-                                <div class="alert alert-info" role="alert">
-                                    <h5>Total a Pagar: <span id="total-pedido">$0</span></h5>
+                                        <!-- Tipo de Entrega (Domicilio vs Local) -->
+                                        <div class="form-group mb-2">
+                                            <label class="small font-weight-bold text-gray-800" for="tipo_entrega">
+                                                <i class="fas fa-truck mr-1 text-primary"></i> Modalidad de Entrega:
+                                            </label>
+                                            <select id="tipo_entrega" class="form-control form-control-sm">
+                                                <option value="domicilio" selected>🛵 Servicio a Domicilio (+$5.000)</option>
+                                                <option value="local">🍽️ Para consumir en el local ($0)</option>
+                                                <option value="llevar">🛍️ Para llevar / Recoger en tienda ($0)</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Costo de Envío / Aumento -->
+                                        <div class="form-group mb-3" id="grupo-costo-domicilio">
+                                            <div class="d-flex justify-content-between">
+                                                <label class="small font-weight-bold text-gray-700" for="aumento">Costo de Domicilio ($):</label>
+                                                <span class="small font-weight-bold text-info" id="etiqueta-entrega">Entrega a Domicilio</span>
+                                            </div>
+                                            <input type="number" id="aumento" class="form-control form-control-sm" value="5000" min="0" placeholder="5000">
+                                        </div>
+
+                                        <!-- Promociones y Descuentos -->
+                                        <div class="form-group mb-2">
+                                            <label class="small font-weight-bold text-gray-800" for="select-descuento">
+                                                <i class="fas fa-tags mr-1 text-success"></i> Promociones y Descuentos:
+                                            </label>
+                                            <select id="select-descuento" class="form-control form-control-sm">
+                                                <option value="ninguno">Ninguno ($0)</option>
+                                                <option value="promo_50k">🎁 Promo 5% (Compras mayores a $50.000)</option>
+                                                <option value="promo_2prod">🍔 Promo 7% (2 o más productos distintos)</option>
+                                                <option value="cliente_frecuente">👑 Descuento Cliente Frecuente (6%)</option>
+                                                <option value="promo_4uds">🔥 Combo Familiar 10% (4 o más unidades)</option>
+                                                <option value="manual">✏️ Descuento Manual ($)</option>
+                                            </select>
+                                            <small id="mensaje-descuento" class="form-text mt-1 font-italic"></small>
+                                        </div>
+
+                                        <!-- Valor de Descuento ($) -->
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex justify-content-between">
+                                                <label class="small font-weight-bold text-gray-700" for="descuento">Monto de Descuento ($):</label>
+                                                <span class="small font-weight-bold text-danger" id="porcentaje-descuento-aplicado">-$0</span>
+                                            </div>
+                                            <input type="number" id="descuento" class="form-control form-control-sm" value="0" min="0" placeholder="0" readonly>
+                                        </div>
+
+                                        <hr>
+
+                                        <!-- Total a Pagar -->
+                                        <div class="p-3 bg-light rounded text-center mb-4 border">
+                                            <span class="small font-weight-bold text-muted text-uppercase d-block mb-1">Total a Pagar</span>
+                                            <h3 class="font-weight-bold text-success mb-0" id="total-pedido">$0</h3>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success btn-block font-weight-bold py-3 shadow">
+                                            <i class="fas fa-check-circle mr-1"></i> Confirmar y Crear Pedido
+                                        </button>
+                                    </div>
                                 </div>
-                            
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4">Crear Pedido</button>
-                            </form>
+                            </div>
                         </div>
-                        
-                      
-                    </div>
+                    </form>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -313,7 +399,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                        <span>Copyright &copy; Pocheches Fast Food 2026 &bull; Creado por Sebastian, Bryan y Yadir. Proyecto educativo del Cesde</span>
                     </div>
                 </div>
             </footer>
@@ -349,8 +435,6 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -362,15 +446,8 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Los estudiantes deben agregar aquí el JavaScript -->
-    <script>
-        // TODO: Implementar:
-        // 1. GET /api/clientes para llenar select de clientes
-        // 2. GET /api/productos para que puedan seleccionar productos
-        // 3. Agregar productos al carrito dinámicamente
-        // 4. Calcular total (productos + descuento + aumento)
-        // 5. POST a /api/pedidos con los datos del formulario
-    </script>
+    <!-- Script modular de Crear Pedido -->
+    <script src="js/crearPedido.js"></script>
 </body>
 
 </html>
